@@ -6,7 +6,7 @@
 //  Copyright © 2018 Maciej Hełmecki. All rights reserved.
 //
 
-public struct Parent: Codable {
+public struct APIParent: Codable {
     public let title: String
     public let locationType: String
     public let woeid: Int

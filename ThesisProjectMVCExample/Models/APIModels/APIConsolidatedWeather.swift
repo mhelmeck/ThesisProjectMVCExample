@@ -6,8 +6,8 @@
 //  Copyright © 2018 Maciej Hełmecki. All rights reserved.
 //
 
-public struct ConsolidatedWeather: Codable {
-    // public let id: Int
+public struct APIConsolidatedWeather: Codable {
+    public let id: Int
     public let weatherStateName: String
     public let weatherStateAbbr: String
     public let windDirectionCompass: String
@@ -24,7 +24,7 @@ public struct ConsolidatedWeather: Codable {
     public let predictability: Int
     
     public enum CodingKeys: String, CodingKey {
-        // case id
+        case id
         case weatherStateName = "weather_state_name"
         case weatherStateAbbr = "weather_state_abbr"
         case windDirectionCompass = "wind_direction_compass"

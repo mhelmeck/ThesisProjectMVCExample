@@ -10,7 +10,12 @@ import UIKit
 
 public class MainTableViewController: UITableViewController {
     // Properties
-    private var activityIndicatorView: UIActivityIndicatorView!
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .gray)
+        
+        return view
+    }()
+    
     private var selectedIndex = 0
     private let dataManager = DataManager()
     
@@ -18,7 +23,6 @@ public class MainTableViewController: UITableViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        activityIndicatorView = UIActivityIndicatorView(style: .gray)
         setupTableView()
         
         tableView.separatorStyle = .none
@@ -62,7 +66,7 @@ public class MainTableViewController: UITableViewController {
             }
             
             let selectedCityWeather = dataManager.forecast[selectedIndex]
-            viewController.weather = selectedCityWeather.weather.first!
+            viewController.weather = selectedCityWeather.weathers.first!
             viewController.cityName = selectedCityWeather.cityName
         }
     }
@@ -85,8 +89,8 @@ public extension MainTableViewController {
         cell.delegate = self
         
         cell.cityNameLabel.text = cityWeather.cityName
-        cell.tempLabel.text = [String(Int(cityWeather.temperature)), "°C"].joined(separator: " ")
-        cell.iconImageView.image = UIImage(named: AssetCodeMapper.map(cityWeather.assetType))
+        cell.tempLabel.text = [String(Int(cityWeather.currentTemperature)), "°C"].joined(separator: " ")
+        cell.iconImageView.image = UIImage(named: AssetCodeMapper.map(cityWeather.assetCode))
         
         return cell
     }

@@ -11,7 +11,7 @@ import UIKit
 public class DetailViewController: UIViewController {
     // Properties
     public var cityName: String = ""
-    public var weather: ConsolidatedWeather!
+    public var weather: APIConsolidatedWeather!
     
     @IBOutlet private weak var dateLabel: UILabel!
     
@@ -109,7 +109,7 @@ public class DetailViewController: UIViewController {
         }
     }
     
-    private func updateView(withWeather weather: ConsolidatedWeather) {
+    private func updateView(withWeather weather: APIConsolidatedWeather) {
         if let image = UIImage(named: AssetCodeMapper.map(weather.weatherStateAbbr)) {
             imageView.image = image
         }
