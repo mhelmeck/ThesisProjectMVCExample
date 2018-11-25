@@ -6,6 +6,7 @@
 //  Copyright © 2018 Maciej Hełmecki. All rights reserved.
 //
 
+//swiftlint:disable identifier_name
 public struct APIConsolidatedWeather: Codable {
     public let id: Int
     public let weatherStateName: String

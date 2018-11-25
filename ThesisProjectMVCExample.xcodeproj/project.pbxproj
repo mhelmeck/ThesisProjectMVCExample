@@ -33,8 +33,9 @@
 		98896D9C21A0DD4A00E9A8DE /* ThesisProjectMVCExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98896D9B21A0DD4A00E9A8DE /* ThesisProjectMVCExampleTests.swift */; };
 		98EEB65A21AB390D00819663 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEB65921AB390D00819663 /* DataManager.swift */; };
 		98EEB65D21AB3C9700819663 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEB65C21AB3C9700819663 /* City.swift */; };
-		98EEB66021AB488700819663 /* WeatherAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEB65F21AB488700819663 /* WeatherAdapter.swift */; };
+		98EEB66021AB488700819663 /* ForecastAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEB65F21AB488700819663 /* ForecastAdapter.swift */; };
 		98EEB66421AB48D400819663 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEB66321AB48D400819663 /* Forecast.swift */; };
+		98EEB66621AB53ED00819663 /* CoordinatesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEB66521AB53ED00819663 /* CoordinatesAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,8 +76,9 @@
 		98896D9D21A0DD4A00E9A8DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98EEB65921AB390D00819663 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		98EEB65C21AB3C9700819663 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
-		98EEB65F21AB488700819663 /* WeatherAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAdapter.swift; sourceTree = "<group>"; };
+		98EEB65F21AB488700819663 /* ForecastAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastAdapter.swift; sourceTree = "<group>"; };
 		98EEB66321AB48D400819663 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		98EEB66521AB53ED00819663 /* CoordinatesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesAdapter.swift; sourceTree = "<group>"; };
 		99EB55AD3864150A6F072BD1 /* Pods_ThesisProjectMVCExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThesisProjectMVCExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A40175D8F5EC77C5AC94D66D /* Pods-ThesisProjectMVCExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThesisProjectMVCExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThesisProjectMVCExample/Pods-ThesisProjectMVCExample.debug.xcconfig"; sourceTree = "<group>"; };
 		ACA1B9A94CA01AAF558100F1 /* Pods-ThesisProjectMVCExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThesisProjectMVCExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThesisProjectMVCExampleTests/Pods-ThesisProjectMVCExampleTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -214,7 +216,8 @@
 		98EEB65E21AB485F00819663 /* Adapters */ = {
 			isa = PBXGroup;
 			children = (
-				98EEB65F21AB488700819663 /* WeatherAdapter.swift */,
+				98EEB66521AB53ED00819663 /* CoordinatesAdapter.swift */,
+				98EEB65F21AB488700819663 /* ForecastAdapter.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -398,7 +401,7 @@
 				984E8A7B21AB287C006C7D28 /* MainTableViewController.swift in Sources */,
 				984E8A7921AAEE38006C7D28 /* ButtonType.swift in Sources */,
 				98EEB66421AB48D400819663 /* Forecast.swift in Sources */,
-				98EEB66021AB488700819663 /* WeatherAdapter.swift in Sources */,
+				98EEB66021AB488700819663 /* ForecastAdapter.swift in Sources */,
 				98896D8C21A0DD4800E9A8DE /* ThesisProjectMVCExample.xcdatamodeld in Sources */,
 				98EEB65D21AB3C9700819663 /* City.swift in Sources */,
 				98896D8621A0DD4800E9A8DE /* DetailViewController.swift in Sources */,
@@ -410,6 +413,7 @@
 				984E8A8021AB2A9F006C7D28 /* MainTableViewCell.swift in Sources */,
 				984E8A7321AAEB98006C7D28 /* APIConsolidatedWeather.swift in Sources */,
 				984E8A6721AAE7C3006C7D28 /* UIColor+Extensions.swift in Sources */,
+				98EEB66621AB53ED00819663 /* CoordinatesAdapter.swift in Sources */,
 				984E8A7521AAEC2E006C7D28 /* APIParent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
