@@ -9,8 +9,12 @@
 /* Begin PBXBuildFile section */
 		3A64BA0EA04211272D32D7B4 /* Pods_ThesisProjectMVCExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EB55AD3864150A6F072BD1 /* Pods_ThesisProjectMVCExample.framework */; };
 		7E0F0E89A1B7D3A4B0C225B9 /* Pods_ThesisProjectMVCExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0749EC856FE7484A9180FB /* Pods_ThesisProjectMVCExampleTests.framework */; };
+		984E8A6721AAE7C3006C7D28 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E8A6621AAE7C3006C7D28 /* UIColor+Extensions.swift */; };
+		984E8A6A21AAE7E3006C7D28 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E8A6921AAE7E3006C7D28 /* UIButton+Extensions.swift */; };
+		984E8A6C21AAE7F1006C7D28 /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E8A6B21AAE7F1006C7D28 /* UITableViewCell+Extensions.swift */; };
+		984E8A6E21AAE7FE006C7D28 /* TypeToAssetNameMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E8A6D21AAE7FE006C7D28 /* TypeToAssetNameMapper.swift */; };
 		98896D8421A0DD4800E9A8DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98896D8321A0DD4800E9A8DE /* AppDelegate.swift */; };
-		98896D8621A0DD4800E9A8DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98896D8521A0DD4800E9A8DE /* ViewController.swift */; };
+		98896D8621A0DD4800E9A8DE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98896D8521A0DD4800E9A8DE /* DetailViewController.swift */; };
 		98896D8921A0DD4800E9A8DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98896D8721A0DD4800E9A8DE /* Main.storyboard */; };
 		98896D8C21A0DD4800E9A8DE /* ThesisProjectMVCExample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 98896D8A21A0DD4800E9A8DE /* ThesisProjectMVCExample.xcdatamodeld */; };
 		98896D8E21A0DD4900E9A8DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98896D8D21A0DD4900E9A8DE /* Assets.xcassets */; };
@@ -31,9 +35,13 @@
 /* Begin PBXFileReference section */
 		06AC1A74053AAD86053C3B5D /* Pods-ThesisProjectMVCExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThesisProjectMVCExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThesisProjectMVCExample/Pods-ThesisProjectMVCExample.release.xcconfig"; sourceTree = "<group>"; };
 		8A9AEB645825D0E1A393D003 /* Pods-ThesisProjectMVCExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThesisProjectMVCExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThesisProjectMVCExampleTests/Pods-ThesisProjectMVCExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		984E8A6621AAE7C3006C7D28 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		984E8A6921AAE7E3006C7D28 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		984E8A6B21AAE7F1006C7D28 /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
+		984E8A6D21AAE7FE006C7D28 /* TypeToAssetNameMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeToAssetNameMapper.swift; sourceTree = "<group>"; };
 		98896D8021A0DD4800E9A8DE /* ThesisProjectMVCExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThesisProjectMVCExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98896D8321A0DD4800E9A8DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		98896D8521A0DD4800E9A8DE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		98896D8521A0DD4800E9A8DE /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		98896D8821A0DD4800E9A8DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		98896D8B21A0DD4800E9A8DE /* ThesisProjectMVCExample.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThesisProjectMVCExample.xcdatamodel; sourceTree = "<group>"; };
 		98896D8D21A0DD4900E9A8DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -77,6 +85,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		984E8A6821AAE7CD006C7D28 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				984E8A6621AAE7C3006C7D28 /* UIColor+Extensions.swift */,
+				984E8A6921AAE7E3006C7D28 /* UIButton+Extensions.swift */,
+				984E8A6B21AAE7F1006C7D28 /* UITableViewCell+Extensions.swift */,
+				984E8A6D21AAE7FE006C7D28 /* TypeToAssetNameMapper.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		98896D7721A0DD4800E9A8DE = {
 			isa = PBXGroup;
 			children = (
@@ -100,8 +119,9 @@
 		98896D8221A0DD4800E9A8DE /* ThesisProjectMVCExample */ = {
 			isa = PBXGroup;
 			children = (
+				984E8A6821AAE7CD006C7D28 /* Utilities */,
 				98896D8321A0DD4800E9A8DE /* AppDelegate.swift */,
-				98896D8521A0DD4800E9A8DE /* ViewController.swift */,
+				98896D8521A0DD4800E9A8DE /* DetailViewController.swift */,
 				98896D8721A0DD4800E9A8DE /* Main.storyboard */,
 				98896D8D21A0DD4900E9A8DE /* Assets.xcassets */,
 				98896D8F21A0DD4900E9A8DE /* LaunchScreen.storyboard */,
@@ -293,8 +313,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				98896D8C21A0DD4800E9A8DE /* ThesisProjectMVCExample.xcdatamodeld in Sources */,
-				98896D8621A0DD4800E9A8DE /* ViewController.swift in Sources */,
+				98896D8621A0DD4800E9A8DE /* DetailViewController.swift in Sources */,
+				984E8A6C21AAE7F1006C7D28 /* UITableViewCell+Extensions.swift in Sources */,
 				98896D8421A0DD4800E9A8DE /* AppDelegate.swift in Sources */,
+				984E8A6A21AAE7E3006C7D28 /* UIButton+Extensions.swift in Sources */,
+				984E8A6E21AAE7FE006C7D28 /* TypeToAssetNameMapper.swift in Sources */,
+				984E8A6721AAE7C3006C7D28 /* UIColor+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
