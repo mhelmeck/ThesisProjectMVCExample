@@ -6,28 +6,20 @@
 //  Copyright © 2018 Maciej Hełmecki. All rights reserved.
 //
 //
-public struct CityForecast {
-    public let cityCode: String
-    public let cityName: String
-    public let currentTemperature: Double
-    public let assetCode: String
-    public let lattLong: String
-    public let weathers: [APIConsolidatedWeather]
-}
 
-public struct City {
+public struct City: Equatable {    
     public let code: String
     public let name: String
     public let coordinates: Coordinates
     public let brief: Brief
-    public let forecast: [Forecast]
+    public let forecastCollection: [Forecast]
 
-    public struct Coordinates {
+    public struct Coordinates: Equatable {
         public let lat: Double
         public let lon: Double
     }
 
-    public struct Brief {
+    public struct Brief: Equatable {
         public let currentTemperature: Double
         public let asset: String
     }
@@ -37,11 +29,11 @@ public struct City {
                 currentTemperature: Double,
                 asset: String,
                 latLon: String,
-                forecast: [Forecast]) {
+                forecastCollection: [Forecast]) {
         self.code = code
         self.name = name
         self.coordinates = CoordinatesAdapter(latLon: latLon).toCoordinates()
         self.brief = Brief(currentTemperature: currentTemperature, asset: asset)
-        self.forecast = forecast
+        self.forecastCollection = forecastCollection
     }
 }

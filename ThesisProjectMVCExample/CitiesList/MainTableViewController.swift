@@ -65,16 +65,16 @@ public class MainTableViewController: UITableViewController {
                 return
             }
             
-            let selectedCityWeather = dataManager.forecast[selectedIndex]
-            viewController.weather = selectedCityWeather.weathers.first!
-            viewController.cityName = selectedCityWeather.cityName
+            let city = dataManager.cityCollection[selectedIndex]
+            viewController.forecast = city.forecastCollection.first!
+            viewController.cityName = city.name
         }
     }
 }
 
 public extension MainTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataManager.forecast.count
+        return dataManager.cityCollection.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,13 +84,13 @@ public extension MainTableViewController {
                 fatalError("mkmk")
         }
         
-        let cityWeather = dataManager.forecast[indexPath.row]
+        let city = dataManager.cityCollection[indexPath.row]
         cell.selectionStyle = .none
         cell.delegate = self
         
-        cell.cityNameLabel.text = cityWeather.cityName
-        cell.tempLabel.text = [String(Int(cityWeather.currentTemperature)), "°C"].joined(separator: " ")
-        cell.iconImageView.image = UIImage(named: AssetCodeMapper.map(cityWeather.assetCode))
+        cell.cityNameLabel.text = city.name
+        cell.tempLabel.text = [String(Int(city.brief.currentTemperature)), "°C"].joined(separator: " ")
+        cell.iconImageView.image = UIImage(named: AssetCodeMapper.map(city.brief.asset))
         
         return cell
     }

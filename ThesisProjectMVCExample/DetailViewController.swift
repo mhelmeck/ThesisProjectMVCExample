@@ -11,7 +11,7 @@ import UIKit
 public class DetailViewController: UIViewController {
     // Properties
     public var cityName: String = ""
-    public var weather: APIConsolidatedWeather!
+    public var forecast: Forecast!
     
     @IBOutlet private weak var dateLabel: UILabel!
     
@@ -48,7 +48,7 @@ public class DetailViewController: UIViewController {
         super.title = cityName
         
         setupView()
-        updateView(withWeather: weather)
+        updateView(withForecast: forecast)
     }
     
     // Actions
@@ -109,20 +109,20 @@ public class DetailViewController: UIViewController {
         }
     }
     
-    private func updateView(withWeather weather: APIConsolidatedWeather) {
-        if let image = UIImage(named: AssetCodeMapper.map(weather.weatherStateAbbr)) {
+    private func updateView(withForecast forecast: Forecast) {
+        if let image = UIImage(named: AssetCodeMapper.map(forecast.assetCode)) {
             imageView.image = image
         }
         
-        dateLabel.text = weather.applicableDate
-        typeValue.text = weather.weatherStateName
-        maxTempValue.text = [String(Int(weather.maxTemp)), "°C"].joined(separator: " ")
-        minTempValue.text = [String(Int(weather.minTemp)), "°C"].joined(separator: " ")
-        windSpeedValue.text = [String(Int(weather.windSpeed)), "m/s"].joined(separator: " ")
-        windDirectionValue.text = weather.windDirectionCompass
-        pressureValue.text = [String(Int(weather.airPressure)), "hPa"].joined(separator: " ")
+        dateLabel.text = forecast.date
+        typeValue.text = forecast.type
+        maxTempValue.text = [String(Int(forecast.maxTemperature)), "°C"].joined(separator: " ")
+        minTempValue.text = [String(Int(forecast.minTemperature)), "°C"].joined(separator: " ")
+        windSpeedValue.text = [String(Int(forecast.windSpeed)), "m/s"].joined(separator: " ")
+        windDirectionValue.text = forecast.windDirection
+        pressureValue.text = [String(Int(forecast.airPressure)), "hPa"].joined(separator: " ")
         
-        switch weather.weatherStateAbbr {
+        switch forecast.assetCode {
         case "h", "hr", "lr", "s", "t":
             rainfallValue.text = "It's raining"
         default:

@@ -8,10 +8,16 @@
 
 import Foundation
 
+public enum APIResult<T> {
+    case success(T)
+    case error(Error)
+}
+public typealias APIResultHandler<T> = (APIResult<T>) -> Void
+
 public class DataManager {
     public var cityCodes: [String] = ["44418", "4118", "804365"]
     public var locations = [APIParent]()
-    public var forecast = [CityForecast]()
+    public var cityCollection = [City]()
     
     public func fetchForecast(forCityCode code: String, completion: @escaping () -> Void) {
         guard let url = URL(string: "https://www.metaweather.com/api/location/\(code)/") else {
@@ -25,40 +31,26 @@ public class DataManager {
             }
             
             do {
+                guard let self = self else {
+                    return
+                }
+                
                 let decoder = JSONDecoder()
-                let cityForecast = try decoder.decode(APIForecast.self, from: data)
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else {
-                        return
-                    }
-                    
-                    guard let firstDayCityForecast = cityForecast.consolidatedWeather.first else {
-                        return
-                    }
-                    
-                    let cityCode = code
-                    let cityName = cityForecast.title
-                    let weather = cityForecast.consolidatedWeather
-//                    let weatherAdapter = WeatherAdapter(consolidatedWeather: consolidatedWeather)
-                    let temperature = firstDayCityForecast.theTemp
-                    let assetType = firstDayCityForecast.weatherStateAbbr
-                    let lattLong: String = cityForecast.lattLong
-                    let cityWeather = CityForecast(cityCode: cityCode,
-                                                   cityName: cityName,
-                                                   currentTemperature: temperature,
-                                                   assetCode: assetType,
-                                                   lattLong: lattLong,
-                                                   weathers: weather)
-                    
-                    if !self.cityCodes.contains(cityCode) {
-                        self.cityCodes.append(cityCode)
-                    }
-                    
-                    let duplicatedForecast = self.forecast.filter { $0.cityCode == cityCode }
-                    if duplicatedForecast.isEmpty {
-                        self.forecast.append(cityWeather)
-                    }
-                    
+                let apiForecast = try decoder.decode(APIForecast.self, from: data)
+
+                let adapter = CityAdapter(apiForecast: apiForecast)
+                let city = adapter.toCity()
+                
+                if !self.cityCodes.contains(city.code) {
+                    self.cityCodes.append(city.code)
+                }
+                
+                let duplications = self.cityCollection.filter { $0.code == city.code }
+                if duplications.isEmpty {
+                    self.cityCollection.append(city)
+                }
+                
+                DispatchQueue.main.async {
                     completion()
                 }
                 
@@ -67,7 +59,7 @@ public class DataManager {
             }
         }.resume()
     }
-    
+
     public func fetchLocation(withLatLon lat: String, _ lon: String, completion: @escaping ([APIParent]) -> Void) {
         guard let url = URL(string: "https://www.metaweather.com/api/location/search/?lattlong=\(lat),\(lon)") else {
             assertionFailure("URL init failed")

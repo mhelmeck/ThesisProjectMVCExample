@@ -36,6 +36,7 @@
 		98EEB66021AB488700819663 /* ForecastAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEB65F21AB488700819663 /* ForecastAdapter.swift */; };
 		98EEB66421AB48D400819663 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEB66321AB48D400819663 /* Forecast.swift */; };
 		98EEB66621AB53ED00819663 /* CoordinatesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEB66521AB53ED00819663 /* CoordinatesAdapter.swift */; };
+		98EEB66821AB63AD00819663 /* CityAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEB66721AB63AD00819663 /* CityAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		98EEB65F21AB488700819663 /* ForecastAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastAdapter.swift; sourceTree = "<group>"; };
 		98EEB66321AB48D400819663 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		98EEB66521AB53ED00819663 /* CoordinatesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesAdapter.swift; sourceTree = "<group>"; };
+		98EEB66721AB63AD00819663 /* CityAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityAdapter.swift; sourceTree = "<group>"; };
 		99EB55AD3864150A6F072BD1 /* Pods_ThesisProjectMVCExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThesisProjectMVCExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A40175D8F5EC77C5AC94D66D /* Pods-ThesisProjectMVCExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThesisProjectMVCExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThesisProjectMVCExample/Pods-ThesisProjectMVCExample.debug.xcconfig"; sourceTree = "<group>"; };
 		ACA1B9A94CA01AAF558100F1 /* Pods-ThesisProjectMVCExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThesisProjectMVCExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThesisProjectMVCExampleTests/Pods-ThesisProjectMVCExampleTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			children = (
 				98EEB66521AB53ED00819663 /* CoordinatesAdapter.swift */,
 				98EEB65F21AB488700819663 /* ForecastAdapter.swift */,
+				98EEB66721AB63AD00819663 /* CityAdapter.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				984E8A7321AAEB98006C7D28 /* APIConsolidatedWeather.swift in Sources */,
 				984E8A6721AAE7C3006C7D28 /* UIColor+Extensions.swift in Sources */,
 				98EEB66621AB53ED00819663 /* CoordinatesAdapter.swift in Sources */,
+				98EEB66821AB63AD00819663 /* CityAdapter.swift in Sources */,
 				984E8A7521AAEC2E006C7D28 /* APIParent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
