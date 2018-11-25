@@ -10,6 +10,9 @@ import UIKit
 
 public class DetailViewController: UIViewController {
     // Properties
+    public var cityName: String = ""
+    public var weather: ConsolidatedWeather!
+    
     @IBOutlet private weak var dateLabel: UILabel!
     
     @IBOutlet private weak var mainViewContainer: UIView!
@@ -42,8 +45,10 @@ public class DetailViewController: UIViewController {
     // Life cycle
     override public func viewDidLoad() {
         super.viewDidLoad()
+        super.title = cityName
         
         setupView()
+        updateView(withWeather: weather)
     }
     
     // Actions
