@@ -14,6 +14,6 @@ public extension UIColor {
     }
     
     class var customPurple: UIColor {
-        return UIColor(red: 134.0 / 255.0, green: 141.0 / 255.0, blue: 193.0 / 255.0, alpha: 1.0) // #868dc1
+        return UIColor(red: 134.0 / 255.0, green: 141.0 / 255.0, blue: 193.0 / 255.0, alpha: 1.0)
     }
 }

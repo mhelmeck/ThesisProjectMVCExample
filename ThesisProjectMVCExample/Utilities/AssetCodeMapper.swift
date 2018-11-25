@@ -9,8 +9,8 @@
 import Foundation
 
 //swiftlint:disable cyclomatic_complexity
-public struct TypeToAssetNameMapper {
-    public static func map(withCode code: String) -> String {
+public struct AssetCodeMapper {
+    public static func map(_ code: String) -> String {
         switch code {
         case "sn":
             return "snow"

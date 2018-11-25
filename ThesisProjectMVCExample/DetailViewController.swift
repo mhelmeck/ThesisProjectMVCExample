@@ -39,15 +39,98 @@ public class DetailViewController: UIViewController {
     @IBOutlet private weak var previewButton: UIButton!
     @IBOutlet private weak var nextButton: UIButton!
     
+    // Life cycle
     override public func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupView()
     }
     
+    // Actions
     @IBAction private func previewButtonTapped(_ sender: Any) {
 
     }
     
     @IBAction private func nextButtonTapped(_ sender: Any) {
         
+    }
+    
+    // Private methods
+    private func setupView() {
+        view.backgroundColor = .white
+        
+        [typeTitle,
+         minTempTitle,
+         maxTempTitle,
+         windSpeedTitle,
+         windDirectionTitle,
+         rainfallTitle,
+         pressureTitle].forEach {
+            $0?.textColor = .gray
+        }
+        
+        [typeValue,
+         minTempValue,
+         maxTempValue,
+         windSpeedValue,
+         windDirectionValue,
+         rainfallValue,
+         pressureValue].forEach {
+            $0?.text = ""
+            $0?.textColor = .customPurple
+        }
+        
+        dateLabel.text = "".uppercased()
+        typeTitle.text = "Type: ".uppercased()
+        minTempTitle.text = "Min temperature: ".uppercased()
+        maxTempTitle.text = "Max temperature: ".uppercased()
+        windSpeedTitle.text = "Wind speed: ".uppercased()
+        windDirectionTitle.text = "Wind direction: ".uppercased()
+        rainfallTitle.text = "Rainfall: ".uppercased()
+        pressureTitle.text = "Pressure: ".uppercased()
+        
+        imageView.contentMode = .scaleAspectFit
+        
+        previewButton.setTitle("Preview", for: .normal)
+        nextButton.setTitle("Next", for: .normal)
+        [previewButton, nextButton].forEach {
+            $0?.setTitleColor(.white, for: .normal)
+            
+            $0?.backgroundColor = .customBlue
+            $0?.setBackground(color: .gray, forState: .disabled)
+            $0?.layer.cornerRadius = 4.0
+            
+            $0?.isEnabled = false
+        }
+    }
+    
+    private func updateView(withWeather weather: ConsolidatedWeather) {
+        if let image = UIImage(named: AssetCodeMapper.map(weather.weatherStateAbbr)) {
+            imageView.image = image
+        }
+        
+        dateLabel.text = weather.applicableDate
+        typeValue.text = weather.weatherStateName
+        maxTempValue.text = [String(Int(weather.maxTemp)), "°C"].joined(separator: " ")
+        minTempValue.text = [String(Int(weather.minTemp)), "°C"].joined(separator: " ")
+        windSpeedValue.text = [String(Int(weather.windSpeed)), "m/s"].joined(separator: " ")
+        windDirectionValue.text = weather.windDirectionCompass
+        pressureValue.text = [String(Int(weather.airPressure)), "hPa"].joined(separator: " ")
+        
+        switch weather.weatherStateAbbr {
+        case "h", "hr", "lr", "s", "t":
+            rainfallValue.text = "It's raining"
+        default:
+            rainfallValue.text = "It's not raining"
+        }
+    }
+    
+    private func handleButton(withType type: ButtonType, isEnabled: Bool) {
+        switch type {
+        case .next:
+            nextButton.isEnabled = isEnabled
+        case .preview:
+            previewButton.isEnabled = isEnabled
+        }
     }
 }
