@@ -119,11 +119,9 @@
 		984E8A6821AAE7CD006C7D28 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				98EEB66921AB64B000819663 /* Extensions */,
 				984E8A6D21AAE7FE006C7D28 /* AssetCodeMapper.swift */,
 				984E8A7821AAEE38006C7D28 /* ButtonType.swift */,
-				984E8A6921AAE7E3006C7D28 /* UIButton+Extensions.swift */,
-				984E8A6621AAE7C3006C7D28 /* UIColor+Extensions.swift */,
-				984E8A6B21AAE7F1006C7D28 /* UITableViewCell+Extensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -149,14 +147,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		984E8A8421AB2AAB006C7D28 /* CitiesList */ = {
+		984E8A8421AB2AAB006C7D28 /* List */ = {
 			isa = PBXGroup;
 			children = (
 				984E8A7A21AB287C006C7D28 /* MainTableViewController.swift */,
 				984E8A7E21AB2A9F006C7D28 /* MainTableViewCell.swift */,
 				984E8A7F21AB2A9F006C7D28 /* MainTableViewCell.xib */,
 			);
-			path = CitiesList;
+			path = List;
 			sourceTree = "<group>";
 		};
 		98896D7721A0DD4800E9A8DE = {
@@ -182,13 +180,13 @@
 		98896D8221A0DD4800E9A8DE /* ThesisProjectMVCExample */ = {
 			isa = PBXGroup;
 			children = (
-				984E8A8421AB2AAB006C7D28 /* CitiesList */,
-				98896D8321A0DD4800E9A8DE /* AppDelegate.swift */,
-				98896D8521A0DD4800E9A8DE /* DetailViewController.swift */,
 				98EEB65921AB390D00819663 /* DataManager.swift */,
+				984E8A8421AB2AAB006C7D28 /* List */,
+				98EEB66A21AB652F00819663 /* Detail */,
 				98EEB65B21AB3C7E00819663 /* Models */,
-				984E8A7D21AB28B4006C7D28 /* Resources */,
 				984E8A6821AAE7CD006C7D28 /* Utilities */,
+				984E8A7D21AB28B4006C7D28 /* Resources */,
+				98896D8321A0DD4800E9A8DE /* AppDelegate.swift */,
 				98896D9221A0DD4900E9A8DE /* Info.plist */,
 				98896D8A21A0DD4800E9A8DE /* ThesisProjectMVCExample.xcdatamodeld */,
 			);
@@ -223,6 +221,24 @@
 				98EEB66721AB63AD00819663 /* CityAdapter.swift */,
 			);
 			path = Adapters;
+			sourceTree = "<group>";
+		};
+		98EEB66921AB64B000819663 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				984E8A6921AAE7E3006C7D28 /* UIButton+Extensions.swift */,
+				984E8A6621AAE7C3006C7D28 /* UIColor+Extensions.swift */,
+				984E8A6B21AAE7F1006C7D28 /* UITableViewCell+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		98EEB66A21AB652F00819663 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				98896D8521A0DD4800E9A8DE /* DetailViewController.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		E5CA96FB44E0CC7026943A69 /* Pods */ = {

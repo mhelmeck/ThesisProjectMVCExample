@@ -14,31 +14,28 @@ public enum APIResult<T> {
 }
 public typealias APIResultHandler<T> = (APIResult<T>) -> Void
 
+public enum APIError: Error {
+    case didFailToDecode
+    case noData
+    case invalidURL
+}
+
 public class DataManager {
-    public var cityCodes: [String] = ["44418", "4118", "804365"]
+    // Properties
+    public var cityCodes: [String] = ["44418", "4118", "804365"] // Get rid of this
     public var locations = [APIParent]()
     public var cityCollection = [City]()
     
+    // Public methods
     public func fetchForecast(forCityCode code: String, completion: @escaping () -> Void) {
-        guard let url = URL(string: "https://www.metaweather.com/api/location/\(code)/") else {
-            assertionFailure("URL init failed")
-            return
-        }
+        let urlString = "https://www.metaweather.com/api/location/\(code)/"
         
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            guard let data = data else {
-                return
-            }
-            
-            do {
-                guard let self = self else {
-                    return
-                }
-                
-                let decoder = JSONDecoder()
-                let apiForecast = try decoder.decode(APIForecast.self, from: data)
-
-                let adapter = CityAdapter(apiForecast: apiForecast)
+        fetchData(withURLString: urlString) { (result: APIResult<APIForecast>) in
+            switch result {
+            case .error(let error):
+                print("Error: \(error)")
+            case .success(let result):
+                let adapter = CityAdapter(apiForecast: result)
                 let city = adapter.toCity()
                 
                 if !self.cityCodes.contains(city.code) {
@@ -50,79 +47,74 @@ public class DataManager {
                     self.cityCollection.append(city)
                 }
                 
-                DispatchQueue.main.async {
-                    completion()
-                }
-                
-            } catch let error {
-                print("Error: ", error)
+                completion()
             }
-        }.resume()
+        }
     }
 
     public func fetchLocation(withLatLon lat: String, _ lon: String, completion: @escaping ([APIParent]) -> Void) {
-        guard let url = URL(string: "https://www.metaweather.com/api/location/search/?lattlong=\(lat),\(lon)") else {
-            assertionFailure("URL init failed")
-            return
+        let urlString = "https://www.metaweather.com/api/location/search/?lattlong=\(lat),\(lon)"
+        fetchData(withURLString: urlString) { (result: APIResult<[APIParent]>) in
+            switch result {
+            case .error(let error):
+                print("Error: \(error)")
+            case .success(let result):
+                completion(result)
+            }
         }
-        
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data else {
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let locations = try decoder.decode([APIParent].self, from: data)
-                DispatchQueue.main.async {
-                    completion(locations)
-                }
-                
-            } catch let error {
-                print("Error: ", error)
-            }
-        }.resume()
     }
     
     public func fetchLocations(withQuery query: String, completion: @escaping () -> Void) {
         let formattedQuery = query.replacingOccurrences(of: " ", with: "%20")
-        guard let url = URL(string: "https://www.metaweather.com/api/location/search/?query=\(formattedQuery)") else {
-            assertionFailure("URL init failed")
-            return
-        }
+        let urlString = "https://www.metaweather.com/api/location/search/?query=\(formattedQuery)"
         
-        fetchLocations(withURL: url, completion: completion)
+        fetchLocations(withURLString: urlString, completion: completion)
     }
     
     public func fetchLocations(withLatLon lat: String, _ lon: String, completion: @escaping () -> Void) {
-        guard let url = URL(string: "https://www.metaweather.com/api/location/search/?lattlong=\(lat),\(lon)") else {
-            assertionFailure("URL init failed")
+        let urlString = "https://www.metaweather.com/api/location/search/?lattlong=\(lat),\(lon)"
+        
+        fetchLocations(withURLString: urlString, completion: completion)    }
+    
+    // Private methods
+    private func fetchLocations(withURLString urlString: String, completion: @escaping () -> Void) {
+        fetchData(withURLString: urlString) { (result: APIResult<[APIParent]>) in
+            switch result {
+            case .error(let error):
+                print("Error: \(error)")
+            case .success(let result):
+                self.locations = result
+                completion()
+            }
+        }
+    }
+    
+    private func fetchData<T: Decodable>(withURLString urlString: String, completion: @escaping APIResultHandler<T>) {
+        guard let url = URL(string: urlString) else {
+            completion(.error(APIError.invalidURL))
             return
         }
         
-        fetchLocations(withURL: url, completion: completion)
-    }
-    
-    private func fetchLocations(withURL url: URL, completion: @escaping () -> Void) {
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let error = error {
+                completion(.error(error))
+                return
+            }
+            
             guard let data = data else {
+                completion(.error(APIError.noData))
                 return
             }
             
             do {
                 let decoder = JSONDecoder()
-                let locations = try decoder.decode([APIParent].self, from: data)
-                DispatchQueue.main.async { [weak self] in
-                    guard let self = self else {
-                        return
-                    }
-                    
-                    self.locations = locations
-                    completion()
-                }
+                let decodedData = try decoder.decode(T.self, from: data)
                 
+                DispatchQueue.main.async {
+                    completion(.success(decodedData))
+                }
             } catch let error {
-                print("Error: ", error)
+                completion(.error(error))
             }
         }.resume()
     }
