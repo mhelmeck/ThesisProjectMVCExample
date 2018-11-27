@@ -18,12 +18,11 @@ public struct CityAdapter {
             fatalError("Fatal Error")
         }
         
-        let adapter = ForecastAdapter(consolidatedWeather: apiForecast.consolidatedWeather)
+        let adapter = ForecastCollectionAdapter(consolidatedWeatherCollection: apiForecast.consolidatedWeather)
         return City(code: String(apiForecast.parent.woeid),
                     name: apiForecast.title,
-                    currentTemperature: firstWeather.theTemp,
-                    asset: firstWeather.weatherStateAbbr,
-                    latLon: apiForecast.lattLong,
+                    coordinates: CoordinatesAdapter(latLon: apiForecast.lattLong).toCoordinates(),
+                    brief: City.Brief(currentTemperature: firstWeather.theTemp, asset: firstWeather.weatherStateAbbr),
                     forecastCollection: adapter.toForecastCollection())
     }
 }

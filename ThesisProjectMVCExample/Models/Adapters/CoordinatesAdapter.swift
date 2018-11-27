@@ -13,13 +13,13 @@ public struct CoordinatesAdapter {
         self.latLon = latLon
     }
     
-    public func toCoordinates() -> City.Coordinates {
+    public func toCoordinates() -> Coordinates {
         let formattedStringLatLon = latLon.replacingOccurrences(of: " ", with: "")
         let stringLatLon = formattedStringLatLon.split(separator: ",")
         guard let lat = Double(stringLatLon[0]), let lon = Double(stringLatLon[1])  else {
             fatalError("Adaptation to coordinates failed")
         }
         
-        return City.Coordinates(lat: lat, lon: lon)
+        return Coordinates(lat: lat, lon: lon)
     }
 }

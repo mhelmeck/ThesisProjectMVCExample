@@ -14,11 +14,6 @@ public struct City: Equatable {
     public let brief: Brief
     public let forecastCollection: [Forecast]
 
-    public struct Coordinates: Equatable {
-        public let lat: Double
-        public let lon: Double
-    }
-
     public struct Brief: Equatable {
         public let currentTemperature: Double
         public let asset: String
@@ -26,14 +21,13 @@ public struct City: Equatable {
     
     public init(code: String,
                 name: String,
-                currentTemperature: Double,
-                asset: String,
-                latLon: String,
+                coordinates: Coordinates,
+                brief: Brief,
                 forecastCollection: [Forecast]) {
         self.code = code
         self.name = name
-        self.coordinates = CoordinatesAdapter(latLon: latLon).toCoordinates()
-        self.brief = Brief(currentTemperature: currentTemperature, asset: asset)
+        self.coordinates = coordinates
+        self.brief = brief
         self.forecastCollection = forecastCollection
     }
 }
