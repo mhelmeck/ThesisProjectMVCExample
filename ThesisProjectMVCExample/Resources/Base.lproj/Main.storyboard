@@ -259,7 +259,13 @@
                             <outlet property="delegate" destination="Uzm-PU-YOS" id="moS-cl-1DT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Maciej Hełmecki" id="Rdr-T7-aul"/>
+                    <navigationItem key="navigationItem" title="Maciej Hełmecki" id="Rdr-T7-aul">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="qyK-7r-7rB">
+                            <connections>
+                                <segue destination="F3O-gt-qAG" kind="show" identifier="PushAddCitySegue" id="UKa-FQ-RZu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="i74-06-k38" id="kBx-tj-U14"/>
                         <segue destination="TUE-Se-dsC" kind="show" identifier="PushDetailsSegue" id="ssj-5S-8dM"/>
@@ -284,6 +290,110 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MeF-0a-PKg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1345" y="-11"/>
+        </scene>
+        <!--Add City View Controller-->
+        <scene sceneID="R5x-N5-SkZ">
+            <objects>
+                <viewController id="F3O-gt-qAG" customClass="AddCityViewController" customModule="ThesisProjectMVCExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g4q-qj-pOs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="9HJ-x3-Khz" userLabel="ButtonsContainer">
+                                <rect key="frame" x="24" y="207.5" width="327" height="48"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2wf-E3-MoR" userLabel="CancelButton">
+                                        <rect key="frame" x="0.0" y="0.0" width="98.5" height="48"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="cancelButtonTapped:" destination="F3O-gt-qAG" eventType="touchUpInside" id="0O9-qb-JwZ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFa-o0-LDZ" userLabel="SearchButton">
+                                        <rect key="frame" x="114.5" y="0.0" width="98" height="48"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="searchButtonTapped:" destination="F3O-gt-qAG" eventType="touchUpInside" id="f9Y-tX-qsc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pVg-wR-mwy" userLabel="CurrentLocationButton">
+                                        <rect key="frame" x="228.5" y="0.0" width="98.5" height="48"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="searchCurrentButtonTapped:" destination="F3O-gt-qAG" eventType="touchUpInside" id="7HO-L2-twp"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="Iag-t2-LSd"/>
+                                </constraints>
+                            </stackView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Trc-r4-Xou">
+                                <rect key="frame" x="48" y="133.5" width="279" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Jce-a4-Lld"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jkz-Kh-HH3">
+                                <rect key="frame" x="0.0" y="287.5" width="375" height="379.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddCityCell" id="BhB-cG-vIR">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BhB-cG-vIR" id="W2M-lR-csR">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="F3O-gt-qAG" id="O5Y-wo-Q0d"/>
+                                    <outlet property="delegate" destination="F3O-gt-qAG" id="49F-lI-pfA"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XAL-Ao-kzk" userLabel="LocationLabel">
+                                <rect key="frame" x="32" y="88" width="311" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jkz-Kh-HH3" firstAttribute="top" secondItem="9HJ-x3-Khz" secondAttribute="bottom" constant="32" id="4Y8-wc-9ev"/>
+                            <constraint firstItem="jkz-Kh-HH3" firstAttribute="trailing" secondItem="9w1-Hi-zYl" secondAttribute="trailing" id="7NE-cq-E1G"/>
+                            <constraint firstItem="9w1-Hi-zYl" firstAttribute="trailing" secondItem="jkz-Kh-HH3" secondAttribute="trailing" id="Ald-sg-l8C"/>
+                            <constraint firstItem="9HJ-x3-Khz" firstAttribute="leading" secondItem="9w1-Hi-zYl" secondAttribute="leading" constant="24" id="Cnb-9x-BfG"/>
+                            <constraint firstItem="XAL-Ao-kzk" firstAttribute="top" secondItem="9w1-Hi-zYl" secondAttribute="top" constant="24" id="GLi-sa-LAB"/>
+                            <constraint firstItem="XAL-Ao-kzk" firstAttribute="leading" secondItem="9w1-Hi-zYl" secondAttribute="leading" constant="32" id="Orr-uW-bgR"/>
+                            <constraint firstItem="9w1-Hi-zYl" firstAttribute="trailing" secondItem="9HJ-x3-Khz" secondAttribute="trailing" constant="24" id="PCl-AQ-pxG"/>
+                            <constraint firstItem="jkz-Kh-HH3" firstAttribute="bottom" secondItem="9w1-Hi-zYl" secondAttribute="bottom" id="Tuz-g7-Hfh"/>
+                            <constraint firstItem="jkz-Kh-HH3" firstAttribute="leading" secondItem="9w1-Hi-zYl" secondAttribute="leading" id="XoD-YM-syh"/>
+                            <constraint firstItem="9w1-Hi-zYl" firstAttribute="trailing" secondItem="Trc-r4-Xou" secondAttribute="trailing" constant="48" id="ceB-n8-dOc"/>
+                            <constraint firstItem="9HJ-x3-Khz" firstAttribute="top" secondItem="Trc-r4-Xou" secondAttribute="bottom" constant="24" id="g17-C6-1q8"/>
+                            <constraint firstItem="Trc-r4-Xou" firstAttribute="leading" secondItem="9w1-Hi-zYl" secondAttribute="leading" constant="48" id="kYz-3Z-b1H"/>
+                            <constraint firstItem="Trc-r4-Xou" firstAttribute="top" secondItem="XAL-Ao-kzk" secondAttribute="bottom" constant="24" id="qpG-0g-HZa"/>
+                            <constraint firstItem="9w1-Hi-zYl" firstAttribute="trailing" secondItem="XAL-Ao-kzk" secondAttribute="trailing" constant="32" id="qy3-pQ-Jbg"/>
+                            <constraint firstItem="jkz-Kh-HH3" firstAttribute="leading" secondItem="9w1-Hi-zYl" secondAttribute="leading" id="wse-eu-5df"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9w1-Hi-zYl"/>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="2wf-E3-MoR" id="mrB-gg-m7X"/>
+                        <outlet property="currentLocationLabel" destination="XAL-Ao-kzk" id="kx7-51-EQY"/>
+                        <outlet property="searchButton" destination="LFa-o0-LDZ" id="w1s-0L-V2s"/>
+                        <outlet property="searchCurrentButton" destination="pVg-wR-mwy" id="Jse-Ts-1zD"/>
+                        <outlet property="searchField" destination="Trc-r4-Xou" id="ppP-2F-2h2"/>
+                        <outlet property="tableView" destination="jkz-Kh-HH3" id="gjY-WH-T8c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="750-B5-x7r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="769" y="-378"/>
         </scene>
     </scenes>
 </document>

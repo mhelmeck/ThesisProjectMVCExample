@@ -69,6 +69,14 @@ public class MainTableViewController: UITableViewController {
             viewController.forecast = city.forecastCollection.first!
             viewController.cityName = city.name
         }
+        
+        if segue.identifier == "PushAddCitySegue" {
+            guard let viewController = segue.destination as? AddCityViewController else {
+                return
+            }
+            
+            viewController.dataManager = dataManager
+        }
     }
 }
 
@@ -97,6 +105,7 @@ public extension MainTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
+//        print(selectedIndex)
         performSegue(withIdentifier: "PushDetailsSegue", sender: nil)
     }
     
