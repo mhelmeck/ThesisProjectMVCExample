@@ -77,6 +77,16 @@ public class MainTableViewController: UITableViewController {
             
             viewController.dataManager = dataManager
         }
+        
+        if segue.identifier == "PushMapSegue" {
+            guard let viewController = segue.destination as? MapViewController else {
+                return
+            }
+            
+            let city = dataManager.cityCollection[selectedIndex]
+            viewController.lat = city.coordinates.lat
+            viewController.lon = city.coordinates.lon
+        }
     }
 }
 
@@ -105,7 +115,6 @@ public extension MainTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
-//        print(selectedIndex)
         performSegue(withIdentifier: "PushDetailsSegue", sender: nil)
     }
     
@@ -116,7 +125,7 @@ public extension MainTableViewController {
 
 extension MainTableViewController: MainTableViewCellDelegate {
     public func mainTableViewCellDidTapNavigationButton(_ cell: MainTableViewCell) {
-//        selectedIndex = tableView.indexPath(for: cell)?.row ?? 0
-//        performSegue(withIdentifier: "PushMapSegue", sender: nil)
+        selectedIndex = tableView.indexPath(for: cell)?.row ?? 0
+        performSegue(withIdentifier: "PushMapSegue", sender: nil)
     }
 }

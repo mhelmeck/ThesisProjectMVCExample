@@ -234,7 +234,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wye-Mp-zoj" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="770" y="340"/>
+            <point key="canvasLocation" x="769" y="744"/>
         </scene>
         <!--Maciej Hełmecki-->
         <scene sceneID="qk5-xk-iSn">
@@ -269,6 +269,7 @@
                     <connections>
                         <outlet property="tableView" destination="i74-06-k38" id="kBx-tj-U14"/>
                         <segue destination="TUE-Se-dsC" kind="show" identifier="PushDetailsSegue" id="ssj-5S-8dM"/>
+                        <segue destination="Wm6-Ar-tY0" kind="show" identifier="PushMapSegue" id="4co-lT-L3K"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FwK-3m-mUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -393,7 +394,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="750-B5-x7r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="769" y="-378"/>
+            <point key="canvasLocation" x="769" y="-11"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="PBU-1q-Ihb">
+            <objects>
+                <viewController id="Wm6-Ar-tY0" customClass="MapViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DT0-FO-R4X">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="IXB-58-9Xu">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="D9A-Xq-WQG" firstAttribute="bottom" secondItem="IXB-58-9Xu" secondAttribute="bottom" id="b5p-G3-yzt"/>
+                            <constraint firstItem="D9A-Xq-WQG" firstAttribute="trailing" secondItem="IXB-58-9Xu" secondAttribute="trailing" id="bvr-mo-zJ6"/>
+                            <constraint firstItem="IXB-58-9Xu" firstAttribute="top" secondItem="D9A-Xq-WQG" secondAttribute="top" id="eyX-ET-v0Z"/>
+                            <constraint firstItem="IXB-58-9Xu" firstAttribute="leading" secondItem="D9A-Xq-WQG" secondAttribute="leading" id="zFU-tW-gOy"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="D9A-Xq-WQG"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="IXB-58-9Xu" id="BwA-8n-C6w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1BU-uq-Amw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="769" y="-705"/>
         </scene>
     </scenes>
 </document>

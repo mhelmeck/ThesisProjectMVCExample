@@ -6,17 +6,17 @@
 //  Copyright © 2018 Maciej Hełmecki. All rights reserved.
 //
 
-import UIKit
 import MapKit
+import UIKit
 
 public class AddCityViewController: UIViewController {
     // Properties
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var searchCurrentButton: UIButton!
-    @IBOutlet weak var searchField: UITextField!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var currentLocationLabel: UILabel!
+    @IBOutlet private weak var cancelButton: UIButton!
+    @IBOutlet private weak var searchButton: UIButton!
+    @IBOutlet private weak var searchCurrentButton: UIButton!
+    @IBOutlet private weak var searchField: UITextField!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var currentLocationLabel: UILabel!
     
     private var activityIndicatorView: UIActivityIndicatorView!
     public let locationManager = CLLocationManager()
@@ -46,21 +46,21 @@ public class AddCityViewController: UIViewController {
     }
     
     // Methods
-    @IBAction func searchButtonTapped(_ sender: Any) {
+    @IBAction private func searchButtonTapped(_ sender: Any) {
         guard let query = searchField.text else {
             return
         }
         
-        dataManager.fetchLocations(withQuery: query, completion: {
+        dataManager.fetchLocations(withQuery: query) {
             self.tableView.reloadData()
-        })
+        }
     }
     
-    @IBAction func cancelButtonTapped(_ sender: Any) {
+    @IBAction private func cancelButtonTapped(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func searchCurrentButtonTapped(_ sender: Any) {
+    @IBAction private func searchCurrentButtonTapped(_ sender: Any) {
         guard let location = currentLocation else {
             return
         }
