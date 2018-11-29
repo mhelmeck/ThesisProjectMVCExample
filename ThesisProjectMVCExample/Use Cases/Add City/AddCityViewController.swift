@@ -11,6 +11,9 @@ import UIKit
 
 public class AddCityViewController: UIViewController {
     // Properties
+    public let locationManager = CLLocationManager()
+    public var dataManager: DataManager!
+    
     @IBOutlet private weak var cancelButton: UIButton!
     @IBOutlet private weak var searchButton: UIButton!
     @IBOutlet private weak var searchCurrentButton: UIButton!
@@ -19,8 +22,6 @@ public class AddCityViewController: UIViewController {
     @IBOutlet private weak var currentLocationLabel: UILabel!
     
     private var activityIndicatorView: UIActivityIndicatorView!
-    public let locationManager = CLLocationManager()
-    public var dataManager: DataManager!
     private var currentLocation: CLLocation? {
         didSet {
             searchCurrentButton.isEnabled = true
@@ -41,11 +42,11 @@ public class AddCityViewController: UIViewController {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        dataManager.locations.removeAll()
+        dataManager.locationCollection.removeAll()
         navigationController?.isNavigationBarHidden = true
     }
     
-    // Methods
+    // Actions
     @IBAction private func searchButtonTapped(_ sender: Any) {
         guard let query = searchField.text else {
             return
@@ -64,6 +65,7 @@ public class AddCityViewController: UIViewController {
         guard let location = currentLocation else {
             return
         }
+        
         let lat = String(location.coordinate.latitude)
         let lon = String(location.coordinate.longitude)
         
@@ -72,11 +74,13 @@ public class AddCityViewController: UIViewController {
         }
     }
     
+    // Private methods
     private func setupView() {
         tableView.separatorStyle = .singleLine
         searchField.layer.cornerRadius = 4
         searchField.layer.borderWidth = 2
         searchField.layer.borderColor = UIColor.gray.cgColor
+        
         setupButtons()
     }
     
@@ -84,6 +88,7 @@ public class AddCityViewController: UIViewController {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
+        
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
         }
@@ -120,25 +125,25 @@ extension AddCityViewController: UITextFieldDelegate {
 
 extension AddCityViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataManager.locations.count
+        return dataManager.locationCollection.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddCityCell") else {
             fatalError("Error")
         }
-        let location = dataManager.locations[indexPath.row]
         
+        let location = dataManager.locationCollection[indexPath.row]
         cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator
-        cell.textLabel?.text = location.title
+        cell.textLabel?.text = location.name
         
         return cell
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let location = dataManager.locations[indexPath.row]
-        let cityCode = String(location.woeid)
+        let location = dataManager.locationCollection[indexPath.row]
+        let cityCode = String(location.code)
         
         activityIndicatorView.center = view.center
         view.addSubview(activityIndicatorView)
@@ -150,7 +155,7 @@ extension AddCityViewController: UITableViewDelegate, UITableViewDataSource {
         
         dataManager.fetchForecast(forCityCode: cityCode) { [weak self] in
             self?.navigationController?.popViewController(animated: true)
-            self?.dataManager.locations.removeAll()
+            self?.dataManager.locationCollection.removeAll()
             self?.activityIndicatorView.stopAnimating()
         }
     }

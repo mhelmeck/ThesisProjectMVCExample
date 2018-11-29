@@ -8,22 +8,10 @@
 
 import Foundation
 
-public enum APIResult<T> {
-    case success(T)
-    case error(Error)
-}
-public typealias APIResultHandler<T> = (APIResult<T>) -> Void
-
-public enum APIError: Error {
-    case didFailToDecode
-    case noData
-    case invalidURL
-}
-
 public class DataManager {
     // Properties
     public var cityCodes: [String] = ["44418", "4118", "804365"] // Get rid of this
-    public var locations = [APIParent]()
+    public var locationCollection = [Location]()
     public var cityCollection = [City]()
     
     // Public methods
@@ -83,7 +71,10 @@ public class DataManager {
             case .error(let error):
                 print("Error: \(error)")
             case .success(let result):
-                self.locations = result
+                let adapter = LocationCollectionAdapter(apiParentCollection: result)
+                let locationCollection = adapter.toLocationCollection()
+                
+                self.locationCollection = locationCollection
                 completion()
             }
         }
