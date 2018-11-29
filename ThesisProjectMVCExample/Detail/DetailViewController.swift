@@ -11,7 +11,8 @@ import UIKit
 public class DetailViewController: UIViewController {
     // Properties
     public var cityName: String = ""
-    public var forecast: Forecast!
+//    public var forecast: Forecast!
+     public let viewModel = ViewModel()
     
     @IBOutlet private weak var dateLabel: UILabel!
     
@@ -48,16 +49,61 @@ public class DetailViewController: UIViewController {
         super.title = cityName
         
         setupView()
-        updateView(withForecast: forecast)
+        
+        viewModel.shouldEnableButton = { [weak self] buttonType, isEnabled in
+            self?.handleButton(withType: buttonType, isEnabled: isEnabled)
+        }
+        
+        viewModel.iterator = 0
+        
+        updateView(withForecast: viewModel.weatherContainer.first!)
     }
     
     // Actions
     @IBAction private func previewButtonTapped(_ sender: Any) {
-
+        UIView.animate(
+            withDuration: 0.75,
+            delay: 0.0,
+            options: .curveEaseOut,
+            animations: {
+                self.mainViewContainer.alpha = 0
+            }, completion: { _ in
+                self.viewModel.showWeatherForPreviewDay { [weak self] weather in
+                    self?.updateView(withForecast: weather)
+                }
+            }
+        )
+        
+        UIView.animate(
+            withDuration: 0.75,
+            delay: 0.0,
+            options: .curveEaseOut,
+            animations: {
+                self.mainViewContainer.alpha = 1
+            }, completion: nil)
     }
     
     @IBAction private func nextButtonTapped(_ sender: Any) {
+        UIView.animate(
+            withDuration: 0.75,
+            delay: 0.0,
+            options: .curveEaseOut,
+            animations: {
+                self.mainViewContainer.alpha = 0
+            }, completion: { _ in
+                self.viewModel.showWeatherForNextDay { [weak self] weather in
+                    self?.updateView(withForecast: weather)
+                }
+            }
+        )
         
+        UIView.animate(
+            withDuration: 0.75,
+            delay: 0.0,
+            options: .curveEaseOut,
+            animations: {
+                self.mainViewContainer.alpha = 1
+            }, completion: nil)
     }
     
     // Private methods
@@ -136,6 +182,50 @@ public class DetailViewController: UIViewController {
             nextButton.isEnabled = isEnabled
         case .preview:
             previewButton.isEnabled = isEnabled
+        }
+    }
+}
+
+public class ViewModel {
+    public var weatherContainer = [Forecast]()
+    public var shouldEnableButton: ((ButtonType, Bool) -> Void)!
+    
+    public var iterator: Int = 0 {
+        didSet {
+            handleButtons(withIterator: iterator)
+        }
+    }
+    
+    public func showWeatherForNextDay(completion: @escaping (Forecast) -> Void) {
+        iterator += 1
+        
+        completion(weatherContainer[iterator])
+    }
+    
+    public func showWeatherForPreviewDay(completion: @escaping (Forecast) -> Void) {
+        iterator -= 1
+        
+        completion(weatherContainer[iterator])
+    }
+    
+    private func handleButtons(withIterator iterator: Int) {
+        if iterator == 0 {
+            shouldEnableButton(.preview, false)
+            if iterator != weatherContainer.count - 1 {
+                shouldEnableButton(.next, true)
+            }
+        }
+        
+        if iterator == weatherContainer.count - 1 {
+            shouldEnableButton(.next, false)
+            if iterator != 0 {
+                shouldEnableButton(.preview, true)
+            }
+        }
+        
+        if iterator > 0 && iterator < weatherContainer.count - 1 {
+            shouldEnableButton(.preview, true)
+            shouldEnableButton(.next, true)
         }
     }
 }
