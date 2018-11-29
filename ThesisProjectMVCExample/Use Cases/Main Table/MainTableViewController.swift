@@ -66,7 +66,7 @@ public class MainTableViewController: UITableViewController {
             }
             
             let city = dataManager.cityCollection[selectedIndex]
-            viewController.viewModel.weatherContainer = city.forecastCollection
+            viewController.forecastCollection = city.forecastCollection
             viewController.cityName = city.name
         }
         

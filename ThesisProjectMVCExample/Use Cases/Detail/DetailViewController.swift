@@ -10,9 +10,8 @@ import UIKit
 
 public class DetailViewController: UIViewController {
     // Properties
+    public var forecastCollection = [Forecast]()
     public var cityName: String = ""
-//    public var forecast: Forecast!
-     public let viewModel = ViewModel()
     
     @IBOutlet private weak var dateLabel: UILabel!
     
@@ -43,6 +42,14 @@ public class DetailViewController: UIViewController {
     @IBOutlet private weak var previewButton: UIButton!
     @IBOutlet private weak var nextButton: UIButton!
     
+    private var shouldEnableButton: ((ButtonType, Bool) -> Void)!
+    
+    private var iterator: Int = 0 {
+        didSet {
+            handleButtons(withIterator: iterator)
+        }
+    }
+    
     // Life cycle
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +57,13 @@ public class DetailViewController: UIViewController {
         
         setupView()
         
-        viewModel.shouldEnableButton = { [weak self] buttonType, isEnabled in
+        shouldEnableButton = { [weak self] buttonType, isEnabled in
             self?.handleButton(withType: buttonType, isEnabled: isEnabled)
         }
         
-        viewModel.iterator = 0
+        iterator = 0
         
-        updateView(withForecast: viewModel.weatherContainer.first!)
+        updateView(withForecast: forecastCollection.first!)
     }
     
     // Actions
@@ -68,7 +75,7 @@ public class DetailViewController: UIViewController {
             animations: {
                 self.mainViewContainer.alpha = 0
             }, completion: { _ in
-                self.viewModel.showWeatherForPreviewDay { [weak self] weather in
+                self.showWeatherForPreviewDay { [weak self] weather in
                     self?.updateView(withForecast: weather)
                 }
             }
@@ -91,7 +98,7 @@ public class DetailViewController: UIViewController {
             animations: {
                 self.mainViewContainer.alpha = 0
             }, completion: { _ in
-                self.viewModel.showWeatherForNextDay { [weak self] weather in
+                self.showWeatherForNextDay { [weak self] weather in
                     self?.updateView(withForecast: weather)
                 }
             }
@@ -184,46 +191,35 @@ public class DetailViewController: UIViewController {
             previewButton.isEnabled = isEnabled
         }
     }
-}
-
-public class ViewModel {
-    public var weatherContainer = [Forecast]()
-    public var shouldEnableButton: ((ButtonType, Bool) -> Void)!
     
-    public var iterator: Int = 0 {
-        didSet {
-            handleButtons(withIterator: iterator)
-        }
-    }
-    
-    public func showWeatherForNextDay(completion: @escaping (Forecast) -> Void) {
+    private func showWeatherForNextDay(completion: @escaping (Forecast) -> Void) {
         iterator += 1
         
-        completion(weatherContainer[iterator])
+        completion(forecastCollection[iterator])
     }
     
-    public func showWeatherForPreviewDay(completion: @escaping (Forecast) -> Void) {
+    private func showWeatherForPreviewDay(completion: @escaping (Forecast) -> Void) {
         iterator -= 1
         
-        completion(weatherContainer[iterator])
+        completion(forecastCollection[iterator])
     }
     
     private func handleButtons(withIterator iterator: Int) {
         if iterator == 0 {
             shouldEnableButton(.preview, false)
-            if iterator != weatherContainer.count - 1 {
+            if iterator != forecastCollection.count - 1 {
                 shouldEnableButton(.next, true)
             }
         }
         
-        if iterator == weatherContainer.count - 1 {
+        if iterator == forecastCollection.count - 1 {
             shouldEnableButton(.next, false)
             if iterator != 0 {
                 shouldEnableButton(.preview, true)
             }
         }
         
-        if iterator > 0 && iterator < weatherContainer.count - 1 {
+        if iterator > 0 && iterator < forecastCollection.count - 1 {
             shouldEnableButton(.preview, true)
             shouldEnableButton(.next, true)
         }
