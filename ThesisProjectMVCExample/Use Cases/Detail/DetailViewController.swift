@@ -8,6 +8,7 @@
 
 import UIKit
 
+//swiftlint:disable file_length
 public class DetailViewController: UIViewController {
     // Properties
     public var forecastCollection = [Forecast]()
