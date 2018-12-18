@@ -19,7 +19,6 @@
 		984E8A7721AAEC42006C7D28 /* APISource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E8A7621AAEC42006C7D28 /* APISource.swift */; };
 		984E8A7921AAEE38006C7D28 /* ButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E8A7821AAEE38006C7D28 /* ButtonType.swift */; };
 		984E8A7B21AB287C006C7D28 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E8A7A21AB287C006C7D28 /* MainTableViewController.swift */; };
-		984E8A7C21AB287C006C7D28 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E8A7A21AB287C006C7D28 /* MainTableViewController.swift */; };
 		984E8A8021AB2A9F006C7D28 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E8A7E21AB2A9F006C7D28 /* MainTableViewCell.swift */; };
 		984E8A8121AB2A9F006C7D28 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E8A7E21AB2A9F006C7D28 /* MainTableViewCell.swift */; };
 		984E8A8221AB2A9F006C7D28 /* MainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984E8A7F21AB2A9F006C7D28 /* MainTableViewCell.xib */; };
@@ -165,16 +164,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		984E8A8421AB2AAB006C7D28 /* Main Table */ = {
-			isa = PBXGroup;
-			children = (
-				984E8A7A21AB287C006C7D28 /* MainTableViewController.swift */,
-				984E8A7E21AB2A9F006C7D28 /* MainTableViewCell.swift */,
-				984E8A7F21AB2A9F006C7D28 /* MainTableViewCell.xib */,
-			);
-			path = "Main Table";
-			sourceTree = "<group>";
-		};
 		98896D7721A0DD4800E9A8DE = {
 			isa = PBXGroup;
 			children = (
@@ -198,8 +187,7 @@
 		98896D8221A0DD4800E9A8DE /* ThesisProjectMVCExample */ = {
 			isa = PBXGroup;
 			children = (
-				98BF501421B090D7002E0723 /* Use Cases */,
-				98EEB65B21AB3C7E00819663 /* Models */,
+				98C85B9B21C993A600907426 /* Project */,
 				984E8A6821AAE7CD006C7D28 /* Utilities */,
 				984E8A7D21AB28B4006C7D28 /* Resources */,
 				98896D8321A0DD4800E9A8DE /* AppDelegate.swift */,
@@ -218,31 +206,34 @@
 			path = ThesisProjectMVCExampleTests;
 			sourceTree = "<group>";
 		};
-		98BF501421B090D7002E0723 /* Use Cases */ = {
-			isa = PBXGroup;
-			children = (
-				98BF501721B091B7002E0723 /* Add City */,
-				98EEB66A21AB652F00819663 /* Detail */,
-				98BF501821B091D3002E0723 /* Map */,
-				984E8A8421AB2AAB006C7D28 /* Main Table */,
-			);
-			path = "Use Cases";
-			sourceTree = "<group>";
-		};
-		98BF501721B091B7002E0723 /* Add City */ = {
+		98BF501421B090D7002E0723 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				988FCD9821AF507C00E4C288 /* AddCityViewController.swift */,
+				98896D8521A0DD4800E9A8DE /* DetailViewController.swift */,
+				988FCD9A21AF567E00E4C288 /* MapViewController.swift */,
+				984E8A7A21AB287C006C7D28 /* MainTableViewController.swift */,
 			);
-			path = "Add City";
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		98BF501821B091D3002E0723 /* Map */ = {
+		98C85B9A21C9938A00907426 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				988FCD9A21AF567E00E4C288 /* MapViewController.swift */,
+				984E8A7E21AB2A9F006C7D28 /* MainTableViewCell.swift */,
+				984E8A7F21AB2A9F006C7D28 /* MainTableViewCell.xib */,
 			);
-			path = Map;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		98C85B9B21C993A600907426 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				98C85B9A21C9938A00907426 /* Views */,
+				98BF501421B090D7002E0723 /* Controllers */,
+				98EEB65B21AB3C7E00819663 /* Models */,
+			);
+			path = Project;
 			sourceTree = "<group>";
 		};
 		98EEB65B21AB3C7E00819663 /* Models */ = {
@@ -279,14 +270,6 @@
 				984E8A6B21AAE7F1006C7D28 /* UITableViewCell+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		98EEB66A21AB652F00819663 /* Detail */ = {
-			isa = PBXGroup;
-			children = (
-				98896D8521A0DD4800E9A8DE /* DetailViewController.swift */,
-			);
-			path = Detail;
 			sourceTree = "<group>";
 		};
 		E5CA96FB44E0CC7026943A69 /* Pods */ = {
@@ -498,7 +481,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				984E8A7C21AB287C006C7D28 /* MainTableViewController.swift in Sources */,
 				984E8A8121AB2A9F006C7D28 /* MainTableViewCell.swift in Sources */,
 				98896D9C21A0DD4A00E9A8DE /* ThesisProjectMVCExampleTests.swift in Sources */,
 			);
