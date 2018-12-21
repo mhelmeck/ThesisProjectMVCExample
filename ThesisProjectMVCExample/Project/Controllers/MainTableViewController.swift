@@ -99,7 +99,7 @@ public extension MainTableViewController {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: MainTableViewCell.identifier,
             for: indexPath) as? MainTableViewCell else {
-                fatalError("mkmk")
+                fatalError("Fatal Error")
         }
         
         let city = dataManager.cityCollection[indexPath.row]

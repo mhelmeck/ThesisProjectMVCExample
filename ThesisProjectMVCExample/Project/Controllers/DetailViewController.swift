@@ -8,7 +8,6 @@
 
 import UIKit
 
-//swiftlint:disable file_length
 public class DetailViewController: UIViewController {
     // Properties
     public var forecastCollection = [Forecast]()
@@ -69,49 +68,31 @@ public class DetailViewController: UIViewController {
     
     // Actions
     @IBAction private func previewButtonTapped(_ sender: Any) {
-        UIView.animate(
-            withDuration: 0.75,
-            delay: 0.0,
-            options: .curveEaseOut,
-            animations: {
-                self.mainViewContainer.alpha = 0
-            }, completion: { _ in
-                self.showWeatherForPreviewDay { [weak self] weather in
-                    self?.updateView(withForecast: weather)
-                }
+        perform(animation: {
+            self.mainViewContainer.alpha = 0
+        }, withCompletion: {
+            self.showWeatherForPreviewDay { [weak self] weather in
+                self?.updateView(withForecast: weather)
             }
-        )
+        })
         
-        UIView.animate(
-            withDuration: 0.75,
-            delay: 0.0,
-            options: .curveEaseOut,
-            animations: {
-                self.mainViewContainer.alpha = 1
-            }, completion: nil)
+        perform(animation: {
+            self.mainViewContainer.alpha = 1
+        }, withCompletion: nil)
     }
     
     @IBAction private func nextButtonTapped(_ sender: Any) {
-        UIView.animate(
-            withDuration: 0.75,
-            delay: 0.0,
-            options: .curveEaseOut,
-            animations: {
-                self.mainViewContainer.alpha = 0
-            }, completion: { _ in
-                self.showWeatherForNextDay { [weak self] weather in
-                    self?.updateView(withForecast: weather)
-                }
+        perform(animation: {
+            self.mainViewContainer.alpha = 0
+        }, withCompletion: {
+            self.showWeatherForNextDay { [weak self] weather in
+                self?.updateView(withForecast: weather)
             }
-        )
+        })
         
-        UIView.animate(
-            withDuration: 0.75,
-            delay: 0.0,
-            options: .curveEaseOut,
-            animations: {
-                self.mainViewContainer.alpha = 1
-            }, completion: nil)
+        perform(animation: {
+            self.mainViewContainer.alpha = 1
+        }, withCompletion: nil)
     }
     
     // Private methods
@@ -224,5 +205,16 @@ public class DetailViewController: UIViewController {
             shouldEnableButton(.preview, true)
             shouldEnableButton(.next, true)
         }
+    }
+    
+    private func perform(animation: @escaping () -> Void,
+                         withCompletion completion: (() -> Void)?) {
+        UIView.animate(
+            withDuration: 0.75,
+            delay: 0.0,
+            options: .curveEaseOut,
+            animations: { animation() },
+            completion: { _ in completion?() }
+        )
     }
 }
