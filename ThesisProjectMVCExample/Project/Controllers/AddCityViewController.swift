@@ -177,7 +177,7 @@ extension AddCityViewController: CLLocationManagerDelegate {
             }
             
             self?.currentLocation = currentLocation
-            self?.currentLocationLabel.text = "Your current location is: \(current.title)"
+            self?.currentLocationLabel.text = "Your current location is: \(current.name)"
         }
     }
     

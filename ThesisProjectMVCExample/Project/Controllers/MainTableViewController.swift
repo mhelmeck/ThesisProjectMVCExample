@@ -17,27 +17,17 @@ public class MainTableViewController: UITableViewController {
     }()
     
     private var selectedIndex = 0
+    // NOTE: Think about taking array of cities here and use manager only for fetching
     private let dataManager = DataManager()
     
     // Setup
     override public func viewDidLoad() {
         super.viewDidLoad()
         
+        registerCell()
         setupTableView()
         
-        tableView.separatorStyle = .none
-        activityIndicatorView.startAnimating()
-        var requestCounter = dataManager.cityCodes.count
-        self.dataManager.cityCodes.forEach { code in
-            self.dataManager.fetchForecast(forCityCode: code) { [weak self] in
-                requestCounter -= 1
-                if requestCounter == 0 {
-                    self?.tableView.reloadData()
-                    self?.tableView.separatorStyle = .singleLine
-                    self?.activityIndicatorView.stopAnimating()
-                }
-            }
-        }
+        fetchInitialData()
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -52,10 +42,29 @@ public class MainTableViewController: UITableViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
-    private func setupTableView() {
+    private func registerCell() {
         let nib = UINib(nibName: MainTableViewCell.identifier, bundle: nil)
-        tableView.backgroundView = activityIndicatorView
         tableView.register(nib, forCellReuseIdentifier: MainTableViewCell.identifier)
+    }
+    
+    private func setupTableView() {
+        tableView.backgroundView = activityIndicatorView
+        tableView.separatorStyle = .none
+    }
+    
+    private func fetchInitialData() {
+        activityIndicatorView.startAnimating()
+        var requestCounter = dataManager.cityCodes.count
+        self.dataManager.cityCodes.forEach { code in
+            self.dataManager.fetchForecast(forCityCode: code) { [weak self] in
+                requestCounter -= 1
+                if requestCounter == 0 {
+                    self?.tableView.reloadData()
+                    self?.tableView.separatorStyle = .singleLine
+                    self?.activityIndicatorView.stopAnimating()
+                }
+            }
+        }
     }
     
     // Actions
@@ -99,7 +108,7 @@ public extension MainTableViewController {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: MainTableViewCell.identifier,
             for: indexPath) as? MainTableViewCell else {
-                fatalError("Fatal Error")
+                fatalError("Failed to dequeue reusable cell")
         }
         
         let city = dataManager.cityCollection[indexPath.row]
