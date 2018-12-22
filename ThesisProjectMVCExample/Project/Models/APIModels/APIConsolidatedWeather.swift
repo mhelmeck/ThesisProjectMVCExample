@@ -1,5 +1,5 @@
 //
-//  ConsolidatedWeather.swift
+//  APIConsolidatedWeather.swift
 //  ThesisProjectMVCExample
 //
 //  Created by Maciej Hełmecki on 25/11/2018.

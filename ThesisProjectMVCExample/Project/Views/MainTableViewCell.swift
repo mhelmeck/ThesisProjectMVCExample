@@ -13,7 +13,7 @@ public protocol MainTableViewCellDelegate: class {
 }
 
 public class MainTableViewCell: UITableViewCell {
-    // Properties
+    // MARK: - Private properties
     //swiftlint:disable private_outlet
     @IBOutlet public weak var cityNameLabel: UILabel!
     @IBOutlet public weak var tempLabel: UILabel!
@@ -21,16 +21,16 @@ public class MainTableViewCell: UITableViewCell {
     
     weak public var delegate: MainTableViewCellDelegate?
     
-    // Init
+    // MARK: - Init
     override public func awakeFromNib() {
         super.awakeFromNib()
     }
     
+    // MARK: - Public methods
     override public func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    // Methods
     @IBAction public func navigationButtonTapped(_ sender: Any) {
         delegate?.mainTableViewCellDidTapNavigationButton(self)
     }

@@ -9,18 +9,18 @@
 import UIKit
 
 public class MainTableViewController: UITableViewController {
-    // Properties
+    // MARK: - Private properties
+    private let apiManager: CityAPIProvider = APIManager()
+    private let repository: CityPersistence = AppRepository.shared
+    private var selectedIndex = 0
+    
     private let activityIndicatorView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .gray)
         
         return view
     }()
     
-    private var selectedIndex = 0
-    // NOTE: Think about taking array of cities here and use manager only for fetching
-    private let dataManager = DataManager()
-    
-    // Setup
+    // MARK: - Init
     override public func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,6 +42,7 @@ public class MainTableViewController: UITableViewController {
         navigationController?.isNavigationBarHidden = false
     }
     
+    // MARK: - Private methods
     private func registerCell() {
         let nib = UINib(nibName: MainTableViewCell.identifier, bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: MainTableViewCell.identifier)
@@ -54,54 +55,57 @@ public class MainTableViewController: UITableViewController {
     
     private func fetchInitialData() {
         activityIndicatorView.startAnimating()
-        var requestCounter = dataManager.cityCodes.count
-        self.dataManager.cityCodes.forEach { code in
-            self.dataManager.fetchForecast(forCityCode: code) { [weak self] in
+        let initialCityCodes = ["44418", "4118", "804365"]
+        var requestCounter = initialCityCodes.count
+    
+        initialCityCodes.forEach {
+            self.apiManager.fetchCity(forCode: $0) { [weak self] in
+                guard let self = self else { return }
+                
+                self.repository.addCity(city: $0)
                 requestCounter -= 1
                 if requestCounter == 0 {
-                    self?.tableView.reloadData()
-                    self?.tableView.separatorStyle = .singleLine
-                    self?.activityIndicatorView.stopAnimating()
+                    self.tableView.reloadData()
+                    self.tableView.separatorStyle = .singleLine
+                    self.activityIndicatorView.stopAnimating()
                 }
             }
         }
     }
     
-    // Actions
+    // MARK: - Public methods
     override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PushDetailsSegue" {
             guard let viewController = segue.destination as? DetailViewController else {
                 return
             }
             
-            let city = dataManager.cityCollection[selectedIndex]
+            let city = repository.getCities()[selectedIndex]
             viewController.forecastCollection = city.forecastCollection
             viewController.cityName = city.name
         }
         
-        if segue.identifier == "PushAddCitySegue" {
-            guard let viewController = segue.destination as? AddCityViewController else {
-                return
-            }
-            
-            viewController.dataManager = dataManager
-        }
+//        if segue.identifier == "PushAddCitySegue" {
+//            guard let viewController = segue.destination as? AddCityViewController else {
+//                return
+//            }
+//        }
         
         if segue.identifier == "PushMapSegue" {
             guard let viewController = segue.destination as? MapViewController else {
                 return
             }
             
-            let city = dataManager.cityCollection[selectedIndex]
-            viewController.lat = city.coordinates.lat
-            viewController.lon = city.coordinates.lon
+            let city = repository.getCities()[selectedIndex]
+            viewController.latitude = city.coordinates.lat
+            viewController.longitude = city.coordinates.lon
         }
     }
 }
 
 public extension MainTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataManager.cityCollection.count
+        return repository.getCities().count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,7 +115,7 @@ public extension MainTableViewController {
                 fatalError("Failed to dequeue reusable cell")
         }
         
-        let city = dataManager.cityCollection[indexPath.row]
+        let city = repository.getCities()[indexPath.row]
         cell.selectionStyle = .none
         cell.delegate = self
         

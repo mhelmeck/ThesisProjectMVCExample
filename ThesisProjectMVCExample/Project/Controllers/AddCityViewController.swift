@@ -10,9 +10,10 @@ import MapKit
 import UIKit
 
 public class AddCityViewController: UIViewController {
-    // Properties
-    public let locationManager = CLLocationManager()
-    public var dataManager: DataManager!
+    // MARK: - Private properties
+    private let apiManager: APIManagerType = APIManager()
+    private let repository: AppRepositoryType = AppRepository.shared
+    private let locationManager = CLLocationManager()
     
     @IBOutlet private weak var cancelButton: UIButton!
     @IBOutlet private weak var searchButton: UIButton!
@@ -22,18 +23,11 @@ public class AddCityViewController: UIViewController {
     @IBOutlet private weak var currentLocationLabel: UILabel!
     
     private var activityIndicatorView: UIActivityIndicatorView!
-    private var currentLocation: CLLocation? {
-        didSet {
-            searchCurrentButton.isEnabled = true
-        }
-    }
-    
-    // Init
+    private var currentCoordinates: Coordinates?
+
+    // MARK: - Init
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
-        activityIndicatorView = UIActivityIndicatorView(style: .gray)
-        searchField.delegate = self
         
         setupCoreLocation()
         setupView()
@@ -42,7 +36,7 @@ public class AddCityViewController: UIViewController {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        dataManager.locationCollection.removeAll()
+        repository.clearLocations()
         navigationController?.isNavigationBarHidden = true
     }
     
@@ -52,8 +46,10 @@ public class AddCityViewController: UIViewController {
             return
         }
         
-        dataManager.fetchLocations(withQuery: query) {
-            self.tableView.reloadData()
+        apiManager.fetchLocations(withQuery: query) { [weak self] in
+            guard let self = self else { return }
+            
+            self.fetchLocations(locations: $0)
         }
     }
     
@@ -62,28 +58,19 @@ public class AddCityViewController: UIViewController {
     }
     
     @IBAction private func searchCurrentButtonTapped(_ sender: Any) {
-        guard let location = currentLocation else {
-            return
+        guard let latitude = currentCoordinates?.lat,
+            let longitude = currentCoordinates?.lon else {
+                return
         }
         
-        let lat = String(location.coordinate.latitude)
-        let lon = String(location.coordinate.longitude)
-        
-        dataManager.fetchLocations(withLatLon: lat, lon) {
-            self.tableView.reloadData()
+        apiManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
+            guard let self = self else { return }
+            
+            self.fetchLocations(locations: $0)
         }
     }
     
-    // Private methods
-    private func setupView() {
-        tableView.separatorStyle = .singleLine
-        searchField.layer.cornerRadius = 4
-        searchField.layer.borderWidth = 2
-        searchField.layer.borderColor = UIColor.gray.cgColor
-        
-        setupButtons()
-    }
-    
+    // MARK: - Private methods
     private func setupCoreLocation() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -94,6 +81,21 @@ public class AddCityViewController: UIViewController {
         }
     }
     
+    private func setupView() {
+        activityIndicatorView = UIActivityIndicatorView(style: .gray)
+        tableView.separatorStyle = .singleLine
+        
+        setupTextField()
+        setupButtons()
+    }
+    
+    private func setupTextField() {
+        searchField.delegate = self
+        searchField.layer.cornerRadius = 4
+        searchField.layer.borderWidth = 2
+        searchField.layer.borderColor = UIColor.gray.cgColor
+    }
+
     private func setupButtons() {
         [cancelButton, searchButton, searchCurrentButton].forEach {
             $0?.setTitleColor(.white, for: .normal)
@@ -107,8 +109,18 @@ public class AddCityViewController: UIViewController {
         searchCurrentButton.setBackground(color: .gray, forState: .disabled)
         searchCurrentButton.isEnabled = false
     }
+    
+    private func fetchLocations(locations: [Location]) {
+        repository.clearLocations()
+        locations.forEach {
+            repository.addLocation(location: $0)
+        }
+        
+        tableView.reloadData()
+    }
 }
 
+// MARK: - UITextFieldDelegate
 extension AddCityViewController: UITextFieldDelegate {
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -125,42 +137,46 @@ extension AddCityViewController: UITextFieldDelegate {
 
 extension AddCityViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataManager.locationCollection.count
+        return repository.getLocations().count
     }
-    
+
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddCityCell") else {
             fatalError("Error")
         }
-        
-        let location = dataManager.locationCollection[indexPath.row]
+
+        let location = repository.getLocations()[indexPath.row]
         cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.text = location.name
-        
+
         return cell
     }
-    
+
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let location = dataManager.locationCollection[indexPath.row]
+        let location = repository.getLocations()[indexPath.row]
         let cityCode = String(location.code)
-        
-        activityIndicatorView.center = view.center
+
         view.addSubview(activityIndicatorView)
+        activityIndicatorView.center = view.center
         activityIndicatorView.backgroundColor = UIColor.white
+        
         activityIndicatorView.startAnimating()
-        
         tableView.isHidden = true
-        searchField.resignFirstResponder()
         
-        dataManager.fetchForecast(forCityCode: cityCode) { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-            self?.dataManager.locationCollection.removeAll()
+        searchField.resignFirstResponder()
+
+        apiManager.fetchCity(forCode: cityCode) { [weak self] in
+            self?.repository.addCity(city: $0)
+            
+            self?.repository.clearLocations()
             self?.activityIndicatorView.stopAnimating()
+            self?.navigationController?.popViewController(animated: true)
         }
     }
 }
 
+// MARK: - CLLocationManagerDelegate
 extension AddCityViewController: CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
@@ -168,20 +184,21 @@ extension AddCityViewController: CLLocationManagerDelegate {
             return
         }
         
-        let lat = currentLocation.coordinate.latitude
-        let lon = currentLocation.coordinate.longitude
+        let latitude = currentLocation.coordinate.latitude
+        let longitude = currentLocation.coordinate.longitude
         
-        dataManager.fetchLocation(withLatLon: String(lat), String(lon)) { [weak self] locations in
-            guard let current = locations.first else {
+        apiManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
+            guard let currentLocation = $0.first else {
                 return
             }
             
-            self?.currentLocation = currentLocation
-            self?.currentLocationLabel.text = "Your current location is: \(current.name)"
+            self?.currentCoordinates = currentLocation.coordinates
+            self?.currentLocationLabel.text = "Your current location is: \(currentLocation.name)"
+            self?.searchCurrentButton.isEnabled = true
         }
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Error: \(error)")
+        print("Failed to get location with error: \(error)")
     }
 }
