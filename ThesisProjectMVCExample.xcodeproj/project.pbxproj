@@ -43,6 +43,7 @@
 		98E4985E21CEE3E200C23611 /* APIManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4985D21CEE3E200C23611 /* APIManagerType.swift */; };
 		98E4986021CEE4D800C23611 /* AppRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4985F21CEE4D800C23611 /* AppRepositoryType.swift */; };
 		98E4986221CEE4EE00C23611 /* AppRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4986121CEE4EE00C23611 /* AppRepository.swift */; };
+		98E4986421CF000F00C23611 /* ForecastUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4986321CF000F00C23611 /* ForecastUIView.swift */; };
 		98EEB65D21AB3C9700819663 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEB65C21AB3C9700819663 /* City.swift */; };
 		98EEB66021AB488700819663 /* ForecastCollectionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEB65F21AB488700819663 /* ForecastCollectionAdapter.swift */; };
 		98EEB66421AB48D400819663 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98EEB66321AB48D400819663 /* Forecast.swift */; };
@@ -99,6 +100,7 @@
 		98E4985D21CEE3E200C23611 /* APIManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManagerType.swift; sourceTree = "<group>"; };
 		98E4985F21CEE4D800C23611 /* AppRepositoryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRepositoryType.swift; sourceTree = "<group>"; };
 		98E4986121CEE4EE00C23611 /* AppRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRepository.swift; sourceTree = "<group>"; };
+		98E4986321CF000F00C23611 /* ForecastUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastUIView.swift; sourceTree = "<group>"; };
 		98EEB65C21AB3C9700819663 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		98EEB65F21AB488700819663 /* ForecastCollectionAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCollectionAdapter.swift; sourceTree = "<group>"; };
 		98EEB66321AB48D400819663 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			children = (
 				984E8A7E21AB2A9F006C7D28 /* MainTableViewCell.swift */,
 				984E8A7F21AB2A9F006C7D28 /* MainTableViewCell.xib */,
+				98E4986321CF000F00C23611 /* ForecastUIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				984E8A7121AAEB8B006C7D28 /* APIForecast.swift in Sources */,
+				98E4986421CF000F00C23611 /* ForecastUIView.swift in Sources */,
 				988FCD7F21AE10FF00E4C288 /* LocationAdapter.swift in Sources */,
 				984E8A7B21AB287C006C7D28 /* MainTableViewController.swift in Sources */,
 				984E8A7921AAEE38006C7D28 /* ButtonType.swift in Sources */,

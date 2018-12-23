@@ -27,7 +27,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OfW-R9-DT6" userLabel="MainViewContainer">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OfW-R9-DT6" userLabel="ForecastView" customClass="ForecastUIView" customModule="ThesisProjectMVCExample" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="120" width="375" height="483"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W0U-1O-Dxu" userLabel="ImageView">
@@ -171,6 +171,23 @@
                                     <constraint firstItem="W0U-1O-Dxu" firstAttribute="top" secondItem="OfW-R9-DT6" secondAttribute="top" constant="8" id="mdf-1c-Xvn"/>
                                     <constraint firstItem="Je6-1W-EYh" firstAttribute="leading" secondItem="OfW-R9-DT6" secondAttribute="leading" constant="24" id="oQ0-B9-S18"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="W0U-1O-Dxu" id="GSY-8f-8vs"/>
+                                    <outlet property="maxTempTitle" destination="ONf-hU-S3n" id="fjl-yb-Tui"/>
+                                    <outlet property="maxTempValue" destination="Ram-1c-07s" id="IwI-T6-aHX"/>
+                                    <outlet property="minTempTitle" destination="Yd3-xE-VlN" id="Jch-1t-4J2"/>
+                                    <outlet property="minTempValue" destination="vnq-hB-xUJ" id="cAN-6d-mKJ"/>
+                                    <outlet property="pressureTitle" destination="Gju-et-Nzy" id="Qgn-jw-DBE"/>
+                                    <outlet property="pressureValue" destination="Ixt-tZ-dHq" id="cJZ-xk-z6Y"/>
+                                    <outlet property="rainfallTitle" destination="bf7-m1-rxT" id="yi8-Yk-gWB"/>
+                                    <outlet property="rainfallValue" destination="PEI-E1-fVg" id="i8F-Fr-N6W"/>
+                                    <outlet property="typeTitle" destination="dmO-oE-XdM" id="eLj-gX-5My"/>
+                                    <outlet property="typeValue" destination="6Qr-Wt-wrZ" id="7Mj-n2-81w"/>
+                                    <outlet property="windDirectionTitle" destination="eJX-Oc-NRv" id="Udz-rZ-V8h"/>
+                                    <outlet property="windDirectionValue" destination="hFI-Ie-Kz1" id="nf6-yQ-mGo"/>
+                                    <outlet property="windSpeedTitle" destination="nn6-tD-1hr" id="5Pw-5M-rXA"/>
+                                    <outlet property="windSpeedValue" destination="yUn-ZO-RBz" id="DLP-8d-Jza"/>
+                                </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="oF8-Wu-IT4" userLabel="ButtonsContainer">
                                 <rect key="frame" x="24" y="619" width="327" height="48"/>
@@ -212,24 +229,9 @@
                     </view>
                     <connections>
                         <outlet property="dateLabel" destination="h5j-TD-2RL" id="g87-9T-zOa"/>
-                        <outlet property="imageView" destination="W0U-1O-Dxu" id="P1j-LN-JTa"/>
-                        <outlet property="mainViewContainer" destination="OfW-R9-DT6" id="jc7-jL-pEi"/>
-                        <outlet property="maxTempTitle" destination="ONf-hU-S3n" id="Axi-kM-ud7"/>
-                        <outlet property="maxTempValue" destination="Ram-1c-07s" id="nH8-4S-Lij"/>
-                        <outlet property="minTempTitle" destination="Yd3-xE-VlN" id="rXf-MY-t1y"/>
-                        <outlet property="minTempValue" destination="vnq-hB-xUJ" id="9Mi-bm-Fhw"/>
+                        <outlet property="forecastView" destination="OfW-R9-DT6" id="jEX-Z2-UZ1"/>
                         <outlet property="nextButton" destination="uO3-UG-fet" id="HQh-kK-13w"/>
-                        <outlet property="pressureTitle" destination="Gju-et-Nzy" id="x76-C9-j85"/>
-                        <outlet property="pressureValue" destination="Ixt-tZ-dHq" id="7Cy-YS-rsa"/>
                         <outlet property="previewButton" destination="h98-dk-kvn" id="ZQy-Q1-JBq"/>
-                        <outlet property="rainfallTitle" destination="bf7-m1-rxT" id="aH4-Ev-4mQ"/>
-                        <outlet property="rainfallValue" destination="PEI-E1-fVg" id="9hW-3G-czl"/>
-                        <outlet property="typeTitle" destination="dmO-oE-XdM" id="8LL-KP-4Mt"/>
-                        <outlet property="typeValue" destination="6Qr-Wt-wrZ" id="huC-gK-k3k"/>
-                        <outlet property="windDirectionTitle" destination="eJX-Oc-NRv" id="tB6-ts-pmT"/>
-                        <outlet property="windDirectionValue" destination="hFI-Ie-Kz1" id="ZxX-sA-FIc"/>
-                        <outlet property="windSpeedTitle" destination="nn6-tD-1hr" id="aEj-hx-ste"/>
-                        <outlet property="windSpeedValue" destination="yUn-ZO-RBz" id="eIk-Ur-kmO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wye-Mp-zoj" sceneMemberID="firstResponder"/>
@@ -399,7 +401,7 @@
         <!--Map View Controller-->
         <scene sceneID="PBU-1q-Ihb">
             <objects>
-                <viewController id="Wm6-Ar-tY0" customClass="MapViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Wm6-Ar-tY0" customClass="MapViewController" customModule="ThesisProjectMVCExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DT0-FO-R4X">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
