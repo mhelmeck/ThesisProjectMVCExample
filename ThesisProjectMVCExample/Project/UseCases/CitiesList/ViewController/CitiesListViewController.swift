@@ -1,5 +1,5 @@
 //
-//  MainTableViewController.swift
+//  CitiesListViewController.swift
 //  ThesisProjectMVCExample
 //
 //  Created by Maciej Hełmecki on 25/11/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class MainTableViewController: UITableViewController {
+public class CitiesListViewController: UITableViewController {
     // MARK: - Private properties
     private let apiManager: CityAPIProvider = APIManager()
     private let repository: CityPersistence = AppRepository.shared
@@ -44,8 +44,8 @@ public class MainTableViewController: UITableViewController {
     
     // MARK: - Private methods
     private func registerCell() {
-        let nib = UINib(nibName: MainTableViewCell.identifier, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: MainTableViewCell.identifier)
+        let nib = UINib(nibName: CityCellView.identifier, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: CityCellView.identifier)
     }
     
     private func setupTableView() {
@@ -75,8 +75,8 @@ public class MainTableViewController: UITableViewController {
     
     // MARK: - Public methods
     override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "PushDetailsSegue" {
-            guard let viewController = segue.destination as? DetailViewController else {
+        if segue.identifier == "PushCityDetailsSegue" {
+            guard let viewController = segue.destination as? CityDetailsViewController else {
                 return
             }
             
@@ -85,14 +85,8 @@ public class MainTableViewController: UITableViewController {
             viewController.cityName = city.name
         }
         
-//        if segue.identifier == "PushAddCitySegue" {
-//            guard let viewController = segue.destination as? AddCityViewController else {
-//                return
-//            }
-//        }
-        
-        if segue.identifier == "PushMapSegue" {
-            guard let viewController = segue.destination as? MapViewController else {
+        if segue.identifier == "PushShowMapSegue" {
+            guard let viewController = segue.destination as? ShowMapViewController else {
                 return
             }
             
@@ -103,15 +97,15 @@ public class MainTableViewController: UITableViewController {
     }
 }
 
-public extension MainTableViewController {
+public extension CitiesListViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return repository.getCities().count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: MainTableViewCell.identifier,
-            for: indexPath) as? MainTableViewCell else {
+            withIdentifier: CityCellView.identifier,
+            for: indexPath) as? CityCellView else {
                 fatalError("Failed to dequeue reusable cell")
         }
         
@@ -128,7 +122,7 @@ public extension MainTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
-        performSegue(withIdentifier: "PushDetailsSegue", sender: nil)
+        performSegue(withIdentifier: "PushCityDetailsSegue", sender: nil)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -136,9 +130,9 @@ public extension MainTableViewController {
     }
 }
 
-extension MainTableViewController: MainTableViewCellDelegate {
-    public func mainTableViewCellDidTapNavigationButton(_ cell: MainTableViewCell) {
+extension CitiesListViewController: CityCellViewDelegate {
+    public func cityCellViewDidTapNavigationButton(_ cell: CityCellView) {
         selectedIndex = tableView.indexPath(for: cell)?.row ?? 0
-        performSegue(withIdentifier: "PushMapSegue", sender: nil)
+        performSegue(withIdentifier: "PushShowMapSegue", sender: nil)
     }
 }

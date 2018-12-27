@@ -1,5 +1,5 @@
 //
-//  AddCityViewController.swift
+//  SearchLocationViewController.swift
 //  ThesisProjectMVCExample
 //
 //  Created by Maciej Hełmecki on 28/11/2018.
@@ -9,7 +9,7 @@
 import MapKit
 import UIKit
 
-public class AddCityViewController: UIViewController {
+public class SearchLocationViewController: UIViewController {
     // MARK: - Private properties
     private let apiManager: APIManagerType = APIManager()
     private let repository: AppRepositoryType = AppRepository.shared
@@ -120,8 +120,7 @@ public class AddCityViewController: UIViewController {
     }
 }
 
-// MARK: - UITextFieldDelegate
-extension AddCityViewController: UITextFieldDelegate {
+extension SearchLocationViewController: UITextFieldDelegate {
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -135,7 +134,7 @@ extension AddCityViewController: UITextFieldDelegate {
     }
 }
 
-extension AddCityViewController: UITableViewDelegate, UITableViewDataSource {
+extension SearchLocationViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return repository.getLocations().count
     }
@@ -176,8 +175,7 @@ extension AddCityViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-// MARK: - CLLocationManagerDelegate
-extension AddCityViewController: CLLocationManagerDelegate {
+extension SearchLocationViewController: CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
         guard let currentLocation = locations.last else {

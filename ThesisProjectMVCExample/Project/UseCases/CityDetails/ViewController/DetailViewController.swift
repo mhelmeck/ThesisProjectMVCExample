@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CityDetailsViewController.swift
 //  ThesisProjectMVCExample
 //
 //  Created by Maciej Hełmecki on 18/11/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class DetailViewController: UIViewController {
+public class CityDetailsViewController: UIViewController {
     // MARK: - Public properties
     public var forecastCollection = [Forecast]()
     public var cityName: String = ""

@@ -1,5 +1,5 @@
 //
-//  MapViewController.swift
+//  ShowMapViewController.swift
 //  ThesisProjectMVCExample
 //
 //  Created by Maciej Hełmecki on 29/11/2018.
@@ -9,7 +9,7 @@
 import MapKit
 import UIKit
 
-public class MapViewController: UIViewController {
+public class ShowMapViewController: UIViewController {
     // MARK: - Private properties
     @IBOutlet private weak var mapView: MKMapView!
     private var annotationView = MKPointAnnotation()

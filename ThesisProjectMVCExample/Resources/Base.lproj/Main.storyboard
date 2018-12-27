@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Detail View Controller-->
+        <!--City Details View Controller-->
         <scene sceneID="QqF-ZR-9P5">
             <objects>
-                <viewController id="TUE-Se-dsC" customClass="DetailViewController" customModule="ThesisProjectMVCExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="TUE-Se-dsC" customClass="CityDetailsViewController" customModule="ThesisProjectMVCExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="74E-Kq-DCQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -238,10 +238,10 @@
             </objects>
             <point key="canvasLocation" x="769" y="744"/>
         </scene>
-        <!--Maciej Hełmecki-->
+        <!--Cities List View Controller-->
         <scene sceneID="qk5-xk-iSn">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="Uzm-PU-YOS" customClass="MainTableViewController" customModule="ThesisProjectMVCExample" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="Uzm-PU-YOS" customClass="CitiesListViewController" customModule="ThesisProjectMVCExample" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="i74-06-k38">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -261,17 +261,17 @@
                             <outlet property="delegate" destination="Uzm-PU-YOS" id="moS-cl-1DT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Maciej Hełmecki" id="Rdr-T7-aul">
+                    <navigationItem key="navigationItem" id="Rdr-T7-aul">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qyK-7r-7rB">
                             <connections>
-                                <segue destination="F3O-gt-qAG" kind="show" identifier="PushAddCitySegue" id="UKa-FQ-RZu"/>
+                                <segue destination="F3O-gt-qAG" kind="show" identifier="PushSearchLocationSegue" id="UKa-FQ-RZu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="i74-06-k38" id="kBx-tj-U14"/>
-                        <segue destination="TUE-Se-dsC" kind="show" identifier="PushDetailsSegue" id="ssj-5S-8dM"/>
-                        <segue destination="Wm6-Ar-tY0" kind="show" identifier="PushMapSegue" id="4co-lT-L3K"/>
+                        <segue destination="TUE-Se-dsC" kind="show" identifier="PushCityDetailsSegue" id="ssj-5S-8dM"/>
+                        <segue destination="Wm6-Ar-tY0" kind="show" identifier="PushShowMapSegue" id="4co-lT-L3K"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FwK-3m-mUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -294,10 +294,10 @@
             </objects>
             <point key="canvasLocation" x="-1345" y="-11"/>
         </scene>
-        <!--Add City View Controller-->
+        <!--Search Location View Controller-->
         <scene sceneID="R5x-N5-SkZ">
             <objects>
-                <viewController id="F3O-gt-qAG" customClass="AddCityViewController" customModule="ThesisProjectMVCExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="F3O-gt-qAG" customClass="SearchLocationViewController" customModule="ThesisProjectMVCExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g4q-qj-pOs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -398,10 +398,10 @@
             </objects>
             <point key="canvasLocation" x="769" y="-11"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Show Map View Controller-->
         <scene sceneID="PBU-1q-Ihb">
             <objects>
-                <viewController id="Wm6-Ar-tY0" customClass="MapViewController" customModule="ThesisProjectMVCExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Wm6-Ar-tY0" customClass="ShowMapViewController" customModule="ThesisProjectMVCExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DT0-FO-R4X">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
