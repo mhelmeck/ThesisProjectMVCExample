@@ -15,15 +15,19 @@ public class SearchLocationViewController: UIViewController {
     private let repository: AppRepositoryType = AppRepository.shared
     private let locationManager = CLLocationManager()
     
+    private var currentCoordinates: Coordinates?
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .gray)
+        
+        return view
+    }()
+    
     @IBOutlet private weak var cancelButton: UIButton!
     @IBOutlet private weak var searchButton: UIButton!
     @IBOutlet private weak var searchCurrentButton: UIButton!
     @IBOutlet private weak var searchField: UITextField!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var currentLocationLabel: UILabel!
-    
-    private var activityIndicatorView: UIActivityIndicatorView!
-    private var currentCoordinates: Coordinates?
 
     // MARK: - Init
     override public func viewDidLoad() {
@@ -40,14 +44,31 @@ public class SearchLocationViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
-    // Actions
+    // MARK: - Private methods
     @IBAction private func searchButtonTapped(_ sender: Any) {
         guard let query = searchField.text else {
             return
         }
         
         apiManager.fetchLocations(withQuery: query) { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
+            
+            self.fetchLocations(locations: $0)
+        }
+    }
+    
+    @IBAction private func searchCurrentButtonTapped(_ sender: Any) {
+        guard let latitude = currentCoordinates?.latitude,
+              let longitude = currentCoordinates?.longitude else {
+                return
+        }
+        
+        apiManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
+            guard let self = self else {
+                return
+            }
             
             self.fetchLocations(locations: $0)
         }
@@ -57,20 +78,6 @@ public class SearchLocationViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @IBAction private func searchCurrentButtonTapped(_ sender: Any) {
-        guard let latitude = currentCoordinates?.lat,
-            let longitude = currentCoordinates?.lon else {
-                return
-        }
-        
-        apiManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
-            guard let self = self else { return }
-            
-            self.fetchLocations(locations: $0)
-        }
-    }
-    
-    // MARK: - Private methods
     private func setupCoreLocation() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -82,7 +89,6 @@ public class SearchLocationViewController: UIViewController {
     }
     
     private func setupView() {
-        activityIndicatorView = UIActivityIndicatorView(style: .gray)
         tableView.separatorStyle = .singleLine
         
         setupTextField()
@@ -140,8 +146,8 @@ extension SearchLocationViewController: UITableViewDelegate, UITableViewDataSour
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddCityCell") else {
-            fatalError("Error")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell") else {
+            fatalError("Failed to dequeue reusable cell")
         }
 
         let location = repository.getLocations()[indexPath.row]
@@ -153,17 +159,9 @@ extension SearchLocationViewController: UITableViewDelegate, UITableViewDataSour
     }
 
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        prepareViewToClose()
         let location = repository.getLocations()[indexPath.row]
         let cityCode = String(location.code)
-
-        view.addSubview(activityIndicatorView)
-        activityIndicatorView.center = view.center
-        activityIndicatorView.backgroundColor = UIColor.white
-        
-        activityIndicatorView.startAnimating()
-        tableView.isHidden = true
-        
-        searchField.resignFirstResponder()
 
         apiManager.fetchCity(forCode: cityCode) { [weak self] in
             self?.repository.addCity(city: $0)
@@ -172,6 +170,17 @@ extension SearchLocationViewController: UITableViewDelegate, UITableViewDataSour
             self?.activityIndicatorView.stopAnimating()
             self?.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    private func prepareViewToClose() {
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.center = view.center
+        activityIndicatorView.backgroundColor = UIColor.white
+        
+        activityIndicatorView.startAnimating()
+        tableView.isHidden = true
+        
+        searchField.resignFirstResponder()
     }
 }
 

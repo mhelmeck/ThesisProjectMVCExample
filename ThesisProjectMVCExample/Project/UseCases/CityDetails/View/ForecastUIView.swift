@@ -34,7 +34,7 @@ public class ForecastUIView: UIView {
     @IBOutlet public weak var pressureTitle: UILabel!
     @IBOutlet public weak var pressureValue: UILabel!
     
-    // Init
+    // MARK: - Init
     override public func awakeFromNib() {
         super.awakeFromNib()
         
@@ -45,7 +45,7 @@ public class ForecastUIView: UIView {
         super.init(coder: aDecoder)
     }
     
-    // Private methods
+    // MARK: - Private methods
     private func setupView() {
         imageView.contentMode = .scaleAspectFit
         

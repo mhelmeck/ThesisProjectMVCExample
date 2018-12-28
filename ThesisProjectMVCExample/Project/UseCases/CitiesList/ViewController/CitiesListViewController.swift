@@ -60,7 +60,9 @@ public class CitiesListViewController: UITableViewController {
     
         initialCityCodes.forEach {
             self.apiManager.fetchCity(forCode: $0) { [weak self] in
-                guard let self = self else { return }
+                guard let self = self else {
+                    return
+                }
                 
                 self.repository.addCity(city: $0)
                 requestCounter -= 1
@@ -91,8 +93,9 @@ public class CitiesListViewController: UITableViewController {
             }
             
             let city = repository.getCities()[selectedIndex]
-            viewController.latitude = city.coordinates.lat
-            viewController.longitude = city.coordinates.lon
+            let coordinates = Coordinates(latitude: city.coordinates.latitude,
+                                          longitude: city.coordinates.longitude)
+            viewController.coordinates = coordinates
         }
     }
 }
@@ -110,7 +113,6 @@ public extension CitiesListViewController {
         }
         
         let city = repository.getCities()[indexPath.row]
-        cell.selectionStyle = .none
         cell.delegate = self
         
         cell.cityNameLabel.text = city.name
@@ -132,7 +134,11 @@ public extension CitiesListViewController {
 
 extension CitiesListViewController: CityCellViewDelegate {
     public func cityCellViewDidTapNavigationButton(_ cell: CityCellView) {
-        selectedIndex = tableView.indexPath(for: cell)?.row ?? 0
+        guard let row = tableView.indexPath(for: cell)?.row else {
+            return
+        }
+        
+        selectedIndex = row
         performSegue(withIdentifier: "PushShowMapSegue", sender: nil)
     }
 }

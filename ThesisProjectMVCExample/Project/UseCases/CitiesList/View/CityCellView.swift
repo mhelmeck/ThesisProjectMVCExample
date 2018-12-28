@@ -13,7 +13,7 @@ public protocol CityCellViewDelegate: class {
 }
 
 public class CityCellView: UITableViewCell {
-    // MARK: - Private properties
+    // MARK: - Public properties
     //swiftlint:disable private_outlet
     @IBOutlet public weak var cityNameLabel: UILabel!
     @IBOutlet public weak var tempLabel: UILabel!
@@ -24,6 +24,8 @@ public class CityCellView: UITableViewCell {
     // MARK: - Init
     override public func awakeFromNib() {
         super.awakeFromNib()
+        
+        setupView()
     }
     
     // MARK: - Public methods
@@ -33,5 +35,10 @@ public class CityCellView: UITableViewCell {
     
     @IBAction public func navigationButtonTapped(_ sender: Any) {
         delegate?.cityCellViewDidTapNavigationButton(self)
+    }
+    
+    // MARK: - Private methods
+    private func setupView() {
+        self.selectionStyle = .none
     }
 }

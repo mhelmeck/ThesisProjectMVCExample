@@ -24,7 +24,7 @@
 		984E8A8221AB2A9F006C7D28 /* CityCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984E8A7F21AB2A9F006C7D28 /* CityCellView.xib */; };
 		984E8A8321AB2A9F006C7D28 /* CityCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 984E8A7F21AB2A9F006C7D28 /* CityCellView.xib */; };
 		98896D8421A0DD4800E9A8DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98896D8321A0DD4800E9A8DE /* AppDelegate.swift */; };
-		98896D8621A0DD4800E9A8DE /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98896D8521A0DD4800E9A8DE /* DetailViewController.swift */; };
+		98896D8621A0DD4800E9A8DE /* CityDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98896D8521A0DD4800E9A8DE /* CityDetailsViewController.swift */; };
 		98896D8921A0DD4800E9A8DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 98896D8721A0DD4800E9A8DE /* Main.storyboard */; };
 		98896D8C21A0DD4800E9A8DE /* ThesisProjectMVCExample.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 98896D8A21A0DD4800E9A8DE /* ThesisProjectMVCExample.xcdatamodeld */; };
 		98896D8E21A0DD4900E9A8DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98896D8D21A0DD4900E9A8DE /* Assets.xcassets */; };
@@ -34,7 +34,7 @@
 		988FCD7B21AE0E9600E4C288 /* ForecastAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988FCD7A21AE0E9600E4C288 /* ForecastAdapter.swift */; };
 		988FCD7D21AE100C00E4C288 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988FCD7C21AE100C00E4C288 /* Location.swift */; };
 		988FCD7F21AE10FF00E4C288 /* LocationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988FCD7E21AE10FF00E4C288 /* LocationAdapter.swift */; };
-		988FCD9921AF507C00E4C288 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988FCD9821AF507C00E4C288 /* AddCityViewController.swift */; };
+		988FCD9921AF507C00E4C288 /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988FCD9821AF507C00E4C288 /* SearchLocationViewController.swift */; };
 		988FCD9B21AF567E00E4C288 /* ShowMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 988FCD9A21AF567E00E4C288 /* ShowMapViewController.swift */; };
 		98BF501621B090F1002E0723 /* APIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BF501521B090F1002E0723 /* APIResult.swift */; };
 		98BF501A21B09421002E0723 /* LocationCollectionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BF501921B09421002E0723 /* LocationCollectionAdapter.swift */; };
@@ -78,7 +78,7 @@
 		984E8A7F21AB2A9F006C7D28 /* CityCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CityCellView.xib; sourceTree = "<group>"; };
 		98896D8021A0DD4800E9A8DE /* ThesisProjectMVCExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThesisProjectMVCExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		98896D8321A0DD4800E9A8DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		98896D8521A0DD4800E9A8DE /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		98896D8521A0DD4800E9A8DE /* CityDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailsViewController.swift; sourceTree = "<group>"; };
 		98896D8821A0DD4800E9A8DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		98896D8B21A0DD4800E9A8DE /* ThesisProjectMVCExample.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ThesisProjectMVCExample.xcdatamodel; sourceTree = "<group>"; };
 		98896D8D21A0DD4900E9A8DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 		988FCD7A21AE0E9600E4C288 /* ForecastAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastAdapter.swift; sourceTree = "<group>"; };
 		988FCD7C21AE100C00E4C288 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		988FCD7E21AE10FF00E4C288 /* LocationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAdapter.swift; sourceTree = "<group>"; };
-		988FCD9821AF507C00E4C288 /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
+		988FCD9821AF507C00E4C288 /* SearchLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationViewController.swift; sourceTree = "<group>"; };
 		988FCD9A21AF567E00E4C288 /* ShowMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMapViewController.swift; sourceTree = "<group>"; };
 		98BF501521B090F1002E0723 /* APIResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResult.swift; sourceTree = "<group>"; };
 		98BF501921B09421002E0723 /* LocationCollectionAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCollectionAdapter.swift; sourceTree = "<group>"; };
@@ -155,7 +155,6 @@
 		980B17E721D5690900BC5BAD /* SearchLocation */ = {
 			isa = PBXGroup;
 			children = (
-				980B17FA21D56B6F00BC5BAD /* View */,
 				980B17F921D56B6B00BC5BAD /* ViewController */,
 			);
 			path = SearchLocation;
@@ -164,7 +163,6 @@
 		980B17E821D5691300BC5BAD /* ShowMap */ = {
 			isa = PBXGroup;
 			children = (
-				980B17F821D56B6800BC5BAD /* View */,
 				980B17F721D56B6500BC5BAD /* ViewController */,
 			);
 			path = ShowMap;
@@ -208,7 +206,7 @@
 		980B17F521D56B5E00BC5BAD /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				98896D8521A0DD4800E9A8DE /* DetailViewController.swift */,
+				98896D8521A0DD4800E9A8DE /* CityDetailsViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -229,26 +227,12 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		980B17F821D56B6800BC5BAD /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		980B17F921D56B6B00BC5BAD /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				988FCD9821AF507C00E4C288 /* AddCityViewController.swift */,
+				988FCD9821AF507C00E4C288 /* SearchLocationViewController.swift */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		980B17FA21D56B6F00BC5BAD /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		984E8A6821AAE7CD006C7D28 /* Utilities */ = {
@@ -574,7 +558,7 @@
 				98EEB66021AB488700819663 /* ForecastCollectionAdapter.swift in Sources */,
 				98896D8C21A0DD4800E9A8DE /* ThesisProjectMVCExample.xcdatamodeld in Sources */,
 				98EEB65D21AB3C9700819663 /* City.swift in Sources */,
-				98896D8621A0DD4800E9A8DE /* DetailViewController.swift in Sources */,
+				98896D8621A0DD4800E9A8DE /* CityDetailsViewController.swift in Sources */,
 				988FCD7921AE0B0800E4C288 /* Coordinates.swift in Sources */,
 				984E8A6C21AAE7F1006C7D28 /* UITableViewCell+Extensions.swift in Sources */,
 				98E4985C21CEE3DD00C23611 /* APIManager.swift in Sources */,
@@ -591,7 +575,7 @@
 				988FCD7B21AE0E9600E4C288 /* ForecastAdapter.swift in Sources */,
 				988FCD9B21AF567E00E4C288 /* ShowMapViewController.swift in Sources */,
 				984E8A7321AAEB98006C7D28 /* APIConsolidatedWeather.swift in Sources */,
-				988FCD9921AF507C00E4C288 /* AddCityViewController.swift in Sources */,
+				988FCD9921AF507C00E4C288 /* SearchLocationViewController.swift in Sources */,
 				984E8A6721AAE7C3006C7D28 /* UIColor+Extensions.swift in Sources */,
 				98BF501A21B09421002E0723 /* LocationCollectionAdapter.swift in Sources */,
 				98E4985A21CEE3BC00C23611 /* APIError.swift in Sources */,
