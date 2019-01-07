@@ -6,15 +6,15 @@
 //  Copyright © 2018 Maciej Hełmecki. All rights reserved.
 //
 
-public typealias APIManagerType = CityAPIProvider & LocationAPIProvider
+public typealias APIManagerType = APIForecastProvider & APIParentProvider
 
-public protocol CityAPIProvider {
-    func fetchCity(forCode code: String, completion: @escaping (City) -> Void)
+public protocol APIForecastProvider {
+    func fetchForecast(forCode code: String, completion: @escaping (APIForecast) -> Void)
 }
 
-public protocol LocationAPIProvider {
-    func fetchLocations(withCoordinate latitude: String,
-                        _ longitude: String,
-                        completion: @escaping ([Location]) -> Void)
-    func fetchLocations(withQuery query: String, completion: @escaping ([Location]) -> Void)
+public protocol APIParentProvider {
+    func fetchParents(withCoordinate latitude: String,
+                      _ longitude: String,
+                      completion: @escaping ([APIParent]) -> Void)
+    func fetchParents(withQuery query: String, completion: @escaping ([APIParent]) -> Void)
 }

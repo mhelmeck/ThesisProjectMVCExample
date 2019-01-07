@@ -10,7 +10,7 @@ import UIKit
 
 public class CitiesListViewController: UITableViewController {
     // MARK: - Private properties
-    private let apiManager: CityAPIProvider = APIManager()
+    private let dataManager: CityProvider = DataManager()
     private let repository: CityPersistence = AppRepository.shared
     private var selectedIndex = 0
     
@@ -59,7 +59,7 @@ public class CitiesListViewController: UITableViewController {
         var requestCounter = initialCityCodes.count
     
         initialCityCodes.forEach {
-            self.apiManager.fetchCity(forCode: $0) { [weak self] in
+            self.dataManager.fetchCity(forCode: $0) { [weak self] in
                 guard let self = self else {
                     return
                 }
@@ -111,14 +111,14 @@ public extension CitiesListViewController {
             for: indexPath) as? CityCellView else {
                 fatalError("Failed to dequeue reusable cell")
         }
-        
+
         let city = repository.getCities()[indexPath.row]
         cell.delegate = self
-        
+
         cell.cityNameLabel.text = city.name
         cell.tempLabel.text = [String(Int(city.brief.currentTemperature)), "°C"].joined(separator: " ")
         cell.iconImageView.image = UIImage(named: AssetCodeMapper.map(city.brief.asset))
-        
+
         return cell
     }
     
@@ -128,7 +128,7 @@ public extension CitiesListViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 60.0
     }
 }
 

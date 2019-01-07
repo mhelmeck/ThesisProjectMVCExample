@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3A64BA0EA04211272D32D7B4 /* Pods_ThesisProjectMVCExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99EB55AD3864150A6F072BD1 /* Pods_ThesisProjectMVCExample.framework */; };
 		7E0F0E89A1B7D3A4B0C225B9 /* Pods_ThesisProjectMVCExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0749EC856FE7484A9180FB /* Pods_ThesisProjectMVCExampleTests.framework */; };
+		980B180221DBFE0400BC5BAD /* DataManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B180121DBFE0400BC5BAD /* DataManagerType.swift */; };
+		980B180421DBFE1300BC5BAD /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980B180321DBFE1300BC5BAD /* DataManager.swift */; };
 		984E8A6721AAE7C3006C7D28 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E8A6621AAE7C3006C7D28 /* UIColor+Extensions.swift */; };
 		984E8A6A21AAE7E3006C7D28 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E8A6921AAE7E3006C7D28 /* UIButton+Extensions.swift */; };
 		984E8A6C21AAE7F1006C7D28 /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984E8A6B21AAE7F1006C7D28 /* UITableViewCell+Extensions.swift */; };
@@ -64,6 +66,8 @@
 /* Begin PBXFileReference section */
 		06AC1A74053AAD86053C3B5D /* Pods-ThesisProjectMVCExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThesisProjectMVCExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThesisProjectMVCExample/Pods-ThesisProjectMVCExample.release.xcconfig"; sourceTree = "<group>"; };
 		8A9AEB645825D0E1A393D003 /* Pods-ThesisProjectMVCExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThesisProjectMVCExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThesisProjectMVCExampleTests/Pods-ThesisProjectMVCExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		980B180121DBFE0400BC5BAD /* DataManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerType.swift; sourceTree = "<group>"; };
+		980B180321DBFE1300BC5BAD /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		984E8A6621AAE7C3006C7D28 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		984E8A6921AAE7E3006C7D28 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		984E8A6B21AAE7F1006C7D28 /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
@@ -333,6 +337,8 @@
 			children = (
 				98E4985D21CEE3E200C23611 /* APIManagerType.swift */,
 				98E4985B21CEE3DD00C23611 /* APIManager.swift */,
+				980B180121DBFE0400BC5BAD /* DataManagerType.swift */,
+				980B180321DBFE1300BC5BAD /* DataManager.swift */,
 				98BF501521B090F1002E0723 /* APIResult.swift */,
 				98E4985921CEE3BC00C23611 /* APIError.swift */,
 			);
@@ -550,6 +556,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				984E8A7121AAEB8B006C7D28 /* APIForecast.swift in Sources */,
+				980B180221DBFE0400BC5BAD /* DataManagerType.swift in Sources */,
 				98E4986421CF000F00C23611 /* ForecastUIView.swift in Sources */,
 				988FCD7F21AE10FF00E4C288 /* LocationAdapter.swift in Sources */,
 				984E8A7B21AB287C006C7D28 /* CitiesListViewController.swift in Sources */,
@@ -579,6 +586,7 @@
 				984E8A6721AAE7C3006C7D28 /* UIColor+Extensions.swift in Sources */,
 				98BF501A21B09421002E0723 /* LocationCollectionAdapter.swift in Sources */,
 				98E4985A21CEE3BC00C23611 /* APIError.swift in Sources */,
+				980B180421DBFE1300BC5BAD /* DataManager.swift in Sources */,
 				98EEB66621AB53ED00819663 /* CoordinatesAdapter.swift in Sources */,
 				98EEB66821AB63AD00819663 /* CityAdapter.swift in Sources */,
 				984E8A7521AAEC2E006C7D28 /* APIParent.swift in Sources */,

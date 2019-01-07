@@ -11,7 +11,7 @@ import UIKit
 
 public class SearchLocationViewController: UIViewController {
     // MARK: - Private properties
-    private let apiManager: APIManagerType = APIManager()
+    private let dataManager: DataManagerType = DataManager()
     private let repository: AppRepositoryType = AppRepository.shared
     private let locationManager = CLLocationManager()
     
@@ -50,7 +50,7 @@ public class SearchLocationViewController: UIViewController {
             return
         }
         
-        apiManager.fetchLocations(withQuery: query) { [weak self] in
+        dataManager.fetchLocations(withQuery: query) { [weak self] in
             guard let self = self else {
                 return
             }
@@ -65,7 +65,7 @@ public class SearchLocationViewController: UIViewController {
                 return
         }
         
-        apiManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
+        dataManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
             guard let self = self else {
                 return
             }
@@ -163,7 +163,7 @@ extension SearchLocationViewController: UITableViewDelegate, UITableViewDataSour
         let location = repository.getLocations()[indexPath.row]
         let cityCode = String(location.code)
 
-        apiManager.fetchCity(forCode: cityCode) { [weak self] in
+        dataManager.fetchCity(forCode: cityCode) { [weak self] in
             self?.repository.addCity(city: $0)
             
             self?.repository.clearLocations()
@@ -194,7 +194,7 @@ extension SearchLocationViewController: CLLocationManagerDelegate {
         let latitude = currentLocation.coordinate.latitude
         let longitude = currentLocation.coordinate.longitude
         
-        apiManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
+        dataManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
             guard let currentLocation = $0.first else {
                 return
             }
